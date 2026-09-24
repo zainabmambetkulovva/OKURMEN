@@ -11,10 +11,31 @@
   },
   "hero": {
     "title": "OKURMEN IT",
+    "title_highlight": "Transform Your Future",
     "subtitle": "Modern IT Education Project",
     "description": "Hybrid format, personal mentor, and real results",
+    "badge": "Modern IT Education",
     "cta_primary": "View Courses",
-    "cta_secondary": "About Us"
+    "cta_secondary": "About Us",
+    "stat_students": "Students",
+    "stat_years": "Years",
+    "stat_online": "Online Access",
+    "card_mentor": "Personal Mentor",
+    "card_mentor_sub": "Up to 50 students",
+    "card_hybrid": "Hybrid Format",
+    "card_hybrid_sub": "Online + Offline"
+  },
+  "features": {
+    "online_title": "Online Format",
+    "online_desc": "Study from anywhere in the world",
+    "mentor_title": "Personal Mentor",
+    "mentor_desc": "Individual support and guidance",
+    "app_title": "OKURMEN App",
+    "app_desc": "Access to lessons 24/7",
+    "certificate_title": "Certificate",
+    "certificate_desc": "Upon course completion",
+    "grant_title": "10,000 som Grant",
+    "grant_desc": "For employment or project"
   },
   "about": {
     "title": "About OKURMEN",
@@ -70,8 +91,13 @@
     "aem_desc": "The training uses Gapyr Madaminov's AEM methodology for maximum efficiency."
   },
   "courses": {
-    "title": "Our Courses",
+    "title": "Best Courses for You",
     "description": "Professional IT education programs",
+    "label": "Our Courses",
+    "point1": "Hybrid learning format - online and offline",
+    "point2": "Personal mentor for each student",
+    "point3": "Real projects and career support",
+    "cta_all_courses": "View All Courses",
     "learn_more": "Learn More",
     "hybrid_format": "Hybrid format",
     "personal_mentor": "Personal mentor",
@@ -83,7 +109,8 @@
     "always": "24/7",
     "info_title": "Course Information",
     "info_description": "Detailed information about courses, training programs and prices will be added after coordination with the OKURMEN team. The course card structure is ready to be filled through the admin panel.",
-    "info_badge": "Course Information"
+    "info_badge": "Course Information",
+    "info_note": "Detailed course information will be added soon. Contact us for more details."
   },
   "activities": {
     "title": "Additional Programs",
@@ -129,7 +156,13 @@
   "grant": {
     "title": "10,000 som Grant",
     "description": "If a student gets a job or creates a major commercial project after completing the course, OKURMEN provides a grant of 10,000 som",
-    "conditions": "Conditions"
+    "conditions": "Conditions",
+    "currency": "som",
+    "badge": "For Graduates",
+    "condition1": "Get employed after completing the course",
+    "condition2": "Or create a major commercial project",
+    "cta": "Learn More",
+    "bottom_text": "Your success is our goal"
   },
   "reviews": {
     "title": "Reviews",
@@ -160,6 +193,8 @@
   },
   "footer": {
     "about": "OKURMEN is a modern IT education project founded in May 2022",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "navigation": "Navigation",
+    "info": "About Us"
   }
 }

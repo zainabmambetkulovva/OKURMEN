@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/sections/HeroSection';
+import FeaturesStrip from '@/components/sections/FeaturesStrip';
 import AboutSection from '@/components/sections/AboutSection';
 import WhySection from '@/components/sections/WhySection';
 import HybridLearningSection from '@/components/sections/HybridLearningSection';
@@ -27,6 +28,7 @@ export default async function HomePage({
     <main className="min-h-screen">
       <Header />
       <HeroSection />
+      <FeaturesStrip />
       <AboutSection />
       <WhySection />
       <HybridLearningSection />

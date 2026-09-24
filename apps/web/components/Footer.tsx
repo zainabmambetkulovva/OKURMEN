@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Container } from '@/components/ui/Container';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -9,105 +8,70 @@ export default function Footer() {
 
   const currentYear = new Date().getFullYear();
 
-  const navSections = [
-    {
-      title: navT('about'),
-      links: [
-        { label: navT('about'), href: '#about' },
-        { label: navT('courses'), href: '#courses' },
-        { label: navT('learning'), href: '#learning' },
-        { label: navT('team'), href: '#team' },
-      ],
-    },
-    {
-      title: navT('contacts'),
-      links: [
-        { label: navT('students'), href: '#students' },
-        { label: navT('reviews'), href: '#reviews' },
-        { label: navT('contacts'), href: '#contacts' },
-      ],
-    },
-  ];
-
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (href === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <Container>
-        <div className="py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {/* Brand Section */}
-            <div className="lg:col-span-2">
-              <h3 className="text-3xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent mb-4">
-                ОКУРМЕН IT
-              </h3>
-              <p className="text-gray-400 leading-relaxed mb-4">{t('about')}</p>
-              <div className="flex items-center space-x-2 text-sm">
-                <span className="text-2xl">📍</span>
-                <span>ОРОЗБЕКОВА, 136, Бишкек</span>
-              </div>
-            </div>
-
-            {/* Navigation Sections */}
-            {navSections.map((section, index) => (
-              <div key={index}>
-                <h4 className="font-bold text-white mb-4">{section.title}</h4>
-                <ul className="space-y-2">
-                  {section.links.map((link, linkIndex) => (
-                    <li key={linkIndex}>
-                      <button
-                        onClick={() => scrollToSection(link.href)}
-                        className="text-gray-400 hover:text-primary-400 transition-colors duration-200 text-sm"
-                      >
-                        {link.label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-gray-500">
-              © {currentYear} ОКУРМЕН IT. {t('rights')}
-            </div>
-            <div className="flex items-center space-x-4">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-primary-400 transition-colors duration-200 text-sm"
-              >
-                Политика конфиденциальности
-              </a>
-              <span className="text-gray-700">|</span>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-primary-400 transition-colors duration-200 text-sm"
-              >
-                Условия использования
-              </a>
+    <footer className="bg-dark-900 text-gray-300 border-t border-dark-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* Brand & Address */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-white">
+              ОКУРМЕН IT
+            </h3>
+            <div className="flex items-start space-x-2 text-sm text-gray-400">
+              <span className="text-lg mt-0.5">📍</span>
+              <span>ОРОЗБЕКОВА, 136, Бишкек</span>
             </div>
           </div>
 
-          {/* Tech Badge */}
-          <div className="mt-8 text-center">
-            <div className="inline-flex items-center space-x-2 bg-gray-800 px-4 py-2 rounded-full text-xs text-gray-500">
-              <span>Built with</span>
-              <span className="text-primary-400">Next.js</span>
-              <span>•</span>
-              <span className="text-accent-400">TypeScript</span>
-              <span>•</span>
-              <span className="text-purple-400">Tailwind CSS</span>
-            </div>
+          {/* Navigation */}
+          <div>
+            <h4 className="font-semibold text-white mb-4 text-sm">{t('navigation')}</h4>
+            <ul className="space-y-2">
+              {[
+                { label: navT('home'), href: '#' },
+                { label: navT('courses'), href: '#courses' },
+                { label: navT('about'), href: '#about' },
+                { label: navT('contacts'), href: '#contacts' },
+              ].map((link, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    className="text-gray-400 hover:text-primary-400 transition-colors duration-200 text-sm"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Info */}
+          <div>
+            <h4 className="font-semibold text-white mb-4 text-sm">{t('info')}</h4>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              {t('about')}
+            </p>
           </div>
         </div>
-      </Container>
+
+        {/* Copyright */}
+        <div className="pt-8 border-t border-dark-800 text-center">
+          <p className="text-sm text-gray-500">
+            © {currentYear} ОКУРМЕН IT. {t('rights')}
+          </p>
+        </div>
+      </div>
     </footer>
   );
 }

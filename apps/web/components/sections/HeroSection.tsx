@@ -14,137 +14,115 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-      </div>
+    <section className="relative min-h-screen flex items-center bg-white overflow-hidden pt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Content */}
+          <div className="space-y-8 animate-fade-in">
+            {/* Badge */}
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent-50 border border-accent-200">
+              <span className="text-accent-700 font-semibold text-sm">
+                ✨ {t('badge')}
+              </span>
+            </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <div className="text-center space-y-8 animate-fade-in">
-          {/* Main Title */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold">
-            <span className="bg-gradient-to-r from-primary-600 via-accent-600 to-purple-600 bg-clip-text text-transparent animate-slide-down">
-              {t('title')}
-            </span>
-          </h1>
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-dark-900">
+              {t('title')}{' '}
+              <span className="text-accent-500">{t('title_highlight')}</span>
+            </h1>
 
-          {/* Subtitle */}
-          <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-800 animate-slide-up">
-            {t('subtitle')}
-          </p>
+            {/* Description */}
+            <p className="text-lg sm:text-xl text-dark-600 leading-relaxed max-w-xl">
+              {t('description')}
+            </p>
 
-          {/* Description */}
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in animation-delay-200">
-            {t('description')}
-          </p>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button
+                size="lg"
+                variant="primary"
+                onClick={() => scrollToSection('#courses')}
+                className="w-full sm:w-auto text-lg font-bold"
+              >
+                {t('cta_primary')}
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => scrollToSection('#about')}
+                className="w-full sm:w-auto"
+              >
+                {t('cta_secondary')}
+              </Button>
+            </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 animate-slide-up animation-delay-400">
-            <Button
-              size="lg"
-              variant="primary"
-              onClick={() => scrollToSection('#courses')}
-              className="w-full sm:w-auto"
-            >
-              {t('cta_primary')}
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => scrollToSection('#about')}
-              className="w-full sm:w-auto"
-            >
-              {t('cta_secondary')}
-            </Button>
+            {/* Quick Stats */}
+            <div className="flex flex-wrap gap-8 pt-8 border-t border-gray-100">
+              <div>
+                <div className="text-3xl font-bold text-primary-600">3000+</div>
+                <div className="text-sm text-dark-600">{t('stat_students')}</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary-600">4+</div>
+                <div className="text-sm text-dark-600">{t('stat_years')}</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary-600">100%</div>
+                <div className="text-sm text-dark-600">{t('stat_online')}</div>
+              </div>
+            </div>
           </div>
 
-          {/* Visual Elements */}
-          <div className="pt-16 grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-4xl mx-auto animate-fade-in animation-delay-600">
-            {[
-              { icon: '💻', label: 'IT Education' },
-              { icon: '👨‍🏫', label: 'Personal Mentor' },
-              { icon: '🎓', label: '3000+ Students' },
-              { icon: '🚀', label: 'Real Results' },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center space-y-2 p-4 bg-white/50 backdrop-blur-sm rounded-xl hover:bg-white/80 transition-all duration-300 hover:scale-105"
-              >
-                <span className="text-4xl">{item.icon}</span>
-                <span className="text-sm font-medium text-gray-700">
-                  {item.label}
-                </span>
+          {/* Right Column: Visual Elements */}
+          <div className="relative lg:h-[600px] animate-fade-in animation-delay-200">
+            {/* Main Image Container */}
+            <div className="relative z-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-3xl p-8 shadow-soft-lg">
+              <div className="aspect-[4/3] bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                {/* Placeholder for image */}
+                <div className="text-center space-y-4">
+                  <div className="text-8xl">💻</div>
+                  <p className="text-white font-medium">Modern IT Education</p>
+                </div>
               </div>
-            ))}
+            </div>
+
+            {/* Floating Card 1 */}
+            <div className="absolute top-8 -right-4 lg:right-8 bg-white rounded-xl shadow-soft-lg p-4 z-20 animate-slide-in-right">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 rounded-full bg-accent-100 flex items-center justify-center text-2xl">
+                  👨‍🏫
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-dark-800">
+                    {t('card_mentor')}
+                  </div>
+                  <div className="text-xs text-dark-500">{t('card_mentor_sub')}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Card 2 */}
+            <div className="absolute bottom-8 -left-4 lg:left-8 bg-white rounded-xl shadow-soft-lg p-4 z-20 animate-slide-in-left animation-delay-300">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center text-2xl">
+                  🎓
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-dark-800">
+                    {t('card_hybrid')}
+                  </div>
+                  <div className="text-xs text-dark-500">{t('card_hybrid_sub')}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -top-8 -left-8 w-24 h-24 bg-accent-200 rounded-full opacity-50 blur-2xl"></div>
+            <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-primary-200 rounded-full opacity-50 blur-2xl"></div>
           </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <button
-          onClick={() => scrollToSection('#about')}
-          className="text-gray-400 hover:text-gray-600 transition-colors"
-          aria-label="Scroll down"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </button>
-      </div>
-
-      <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-
-        .animation-delay-200 {
-          animation-delay: 0.2s;
-        }
-
-        .animation-delay-400 {
-          animation-delay: 0.4s;
-        }
-
-        .animation-delay-600 {
-          animation-delay: 0.6s;
-        }
-      `}</style>
     </section>
   );
 }
