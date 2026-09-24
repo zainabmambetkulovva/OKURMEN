@@ -71,7 +71,8 @@
     "activities": {
       "title": "Development Classes",
       "description": "Additional educational programs"
-    }
+    },
+    "bottom_text": "students have already chosen OKURMEN for their IT education"
   },
   "hybrid": {
     "title": "How Hybrid Learning Works",
@@ -149,9 +150,20 @@
     "total": "3000+ students",
     "apple": "One of our students currently works at Apple",
     "mayor": "Alumni work at Bishkek City Hall",
+    "mayor_company": "Bishkek City Hall",
     "kulikovsky": "Alumni work at Kulikovsky",
     "kazakhstan": "Alumni work at IT companies in Kazakhstan",
-    "freelance": "Some students earn through freelancing"
+    "kazakhstan_company": "IT Companies in Kazakhstan",
+    "freelance": "Some students earn through freelancing",
+    "freelance_company": "Freelance",
+    "employment_title": "Employment",
+    "employment_desc": "Graduates work in major companies and government institutions",
+    "international_title": "International Experience",
+    "international_desc": "Students get opportunities to work in companies across different countries",
+    "growth_title": "Career Growth",
+    "growth_desc": "From student to IT industry professional",
+    "bottom_highlight": "Every success story",
+    "bottom_text": "starts with the first step. Join OKURMEN and become part of our growing community of IT professionals."
   },
   "grant": {
     "title": "10,000 som Grant",

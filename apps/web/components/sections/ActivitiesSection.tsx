@@ -1,8 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Container } from '@/components/ui/Container';
-import { Card } from '@/components/ui/Card';
 
 export default function ActivitiesSection() {
   const t = useTranslations('activities');
@@ -11,111 +9,102 @@ export default function ActivitiesSection() {
     {
       title: t('onugu'),
       icon: '🌱',
-      gradient: 'from-green-500 to-emerald-500',
-      description: 'Өнүгүү сабактары',
+      color: 'blue',
     },
     {
       title: t('oratory'),
       icon: '🎤',
-      gradient: 'from-purple-500 to-pink-500',
-      description: 'Развитие навыков публичных выступлений',
+      color: 'orange',
     },
     {
       title: t('literacy'),
       icon: '⌨️',
-      gradient: 'from-blue-500 to-cyan-500',
-      description: 'Базовые навыки работы с компьютером',
+      color: 'blue',
     },
     {
       title: t('talking'),
       icon: '💬',
-      gradient: 'from-orange-500 to-red-500',
-      description: 'Разговорный клуб для практики языка',
+      color: 'orange',
     },
     {
       title: t('ai'),
       icon: '🤖',
-      gradient: 'from-indigo-500 to-purple-500',
-      description: 'Искусственный интеллект и современные технологии',
+      color: 'blue',
     },
     {
       title: t('seminars'),
       icon: '🎯',
-      gradient: 'from-yellow-500 to-amber-500',
-      description: 'Семинары от Гапыра Мадаминова',
+      color: 'orange',
     },
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <Container>
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-dark-900 mb-4">
             {t('title')}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-accent-600 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto rounded-full"></div>
         </div>
 
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {activities.map((activity, index) => (
-            <Card
+            <div
               key={index}
-              hover
-              className="group relative overflow-hidden cursor-pointer"
+              className="group bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Background Gradient on Hover */}
+              {/* Icon */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${activity.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
-              ></div>
-
-              <div className="relative z-10">
-                {/* Icon */}
-                <div
-                  className={`w-20 h-20 mb-4 rounded-2xl bg-gradient-to-br ${activity.gradient} flex items-center justify-center text-4xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}
-                >
-                  {activity.icon}
-                </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-300">
-                  {activity.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {activity.description}
-                </p>
-
-                {/* Decorative Line */}
-                <div
-                  className={`mt-4 h-1 bg-gradient-to-r ${activity.gradient} rounded-full w-0 group-hover:w-full transition-all duration-500`}
-                ></div>
+                className={`w-20 h-20 mb-6 rounded-xl flex items-center justify-center text-5xl shadow-soft ${
+                  activity.color === 'blue'
+                    ? 'bg-primary-50 group-hover:bg-primary-100'
+                    : 'bg-accent-50 group-hover:bg-accent-100'
+                } transition-colors duration-300`}
+              >
+                {activity.icon}
               </div>
-            </Card>
+
+              {/* Title */}
+              <h3 className="text-xl font-bold text-dark-900 mb-3">
+                {activity.title}
+              </h3>
+
+              {/* Decorative Line */}
+              <div
+                className={`mt-6 h-1 rounded-full transition-all duration-300 ${
+                  activity.color === 'blue'
+                    ? 'w-12 bg-primary-500 group-hover:w-full'
+                    : 'w-12 bg-accent-500 group-hover:w-full'
+                }`}
+              ></div>
+            </div>
           ))}
         </div>
 
         {/* Bottom Info Section */}
-        <div className="mt-16 bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8 text-center animate-fade-in">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+        <div className="mt-16 bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl p-8 md:p-12 text-center border border-gray-100">
+          <h3 className="text-2xl sm:text-3xl font-bold text-dark-900 mb-4">
             {t('bottom_title')}
           </h3>
-          <p className="text-gray-700 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-dark-700 text-lg max-w-3xl mx-auto leading-relaxed mb-8">
             {t('bottom_description')}
           </p>
-          <div className="mt-6 flex items-center justify-center space-x-4 flex-wrap gap-2">
-            <span className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <div className="flex items-center justify-center space-x-4 flex-wrap gap-3">
+            <span className="px-5 py-2 bg-white rounded-full text-sm font-semibold text-dark-700 shadow-soft hover:shadow-soft-lg transition-shadow duration-300">
               🎓 {t('badge_education')}
             </span>
-            <span className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">
+            <span className="px-5 py-2 bg-white rounded-full text-sm font-semibold text-dark-700 shadow-soft hover:shadow-soft-lg transition-shadow duration-300">
               💪 {t('badge_development')}
             </span>
-            <span className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">
+            <span className="px-5 py-2 bg-white rounded-full text-sm font-semibold text-dark-700 shadow-soft hover:shadow-soft-lg transition-shadow duration-300">
               🤝 {t('badge_community')}
             </span>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

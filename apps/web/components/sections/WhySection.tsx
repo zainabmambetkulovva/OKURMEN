@@ -1,8 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Container } from '@/components/ui/Container';
-import { Card } from '@/components/ui/Card';
 
 export default function WhySection() {
   const t = useTranslations('why');
@@ -12,106 +10,108 @@ export default function WhySection() {
       icon: '🔄',
       title: t('hybrid.title'),
       description: t('hybrid.description'),
-      gradient: 'from-blue-500 to-cyan-500',
+      color: 'blue',
     },
     {
       icon: '👨‍🏫',
       title: t('mentor.title'),
       description: t('mentor.description'),
-      gradient: 'from-purple-500 to-pink-500',
+      color: 'orange',
     },
     {
       icon: '📱',
       title: t('access.title'),
       description: t('access.description'),
-      gradient: 'from-green-500 to-emerald-500',
+      color: 'blue',
     },
     {
       icon: '🎯',
       title: t('methodology.title'),
       description: t('methodology.description'),
-      gradient: 'from-orange-500 to-red-500',
+      color: 'orange',
     },
     {
       icon: '💰',
       title: t('grant.title'),
       description: t('grant.description'),
-      gradient: 'from-yellow-500 to-amber-500',
+      color: 'blue',
     },
     {
       icon: '📚',
       title: t('activities.title'),
       description: t('activities.description'),
-      gradient: 'from-indigo-500 to-purple-500',
+      color: 'orange',
     },
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
-      <Container>
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-dark-900 mb-4">
             {t('title')}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-accent-600 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto rounded-full"></div>
         </div>
 
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card
+            <div
               key={index}
-              hover
-              className="group relative overflow-hidden"
+              className="group bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Gradient Background on Hover */}
+              {/* Icon */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-              ></div>
-
-              <div className="relative z-10">
-                {/* Icon */}
-                <div
-                  className={`w-16 h-16 mb-4 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                >
-                  {feature.icon}
-                </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {feature.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
-
-                {/* Decorative Element */}
-                <div
-                  className={`mt-4 w-12 h-1 bg-gradient-to-r ${feature.gradient} rounded-full group-hover:w-full transition-all duration-300`}
-                ></div>
+                className={`w-16 h-16 mb-6 rounded-xl flex items-center justify-center text-4xl shadow-soft ${
+                  feature.color === 'blue'
+                    ? 'bg-primary-50 group-hover:bg-primary-100'
+                    : 'bg-accent-50 group-hover:bg-accent-100'
+                } transition-colors duration-300`}
+              >
+                {feature.icon}
               </div>
-            </Card>
+
+              {/* Title */}
+              <h3 className="text-xl font-bold text-dark-900 mb-3">
+                {feature.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-dark-600 leading-relaxed">
+                {feature.description}
+              </p>
+
+              {/* Decorative Line */}
+              <div
+                className={`mt-6 h-1 rounded-full transition-all duration-300 ${
+                  feature.color === 'blue'
+                    ? 'w-12 bg-primary-500 group-hover:w-full'
+                    : 'w-12 bg-accent-500 group-hover:w-full'
+                }`}
+              ></div>
+            </div>
           ))}
         </div>
 
-        {/* Bottom CTA Section */}
+        {/* Bottom Stats */}
         <div className="mt-16 text-center">
-          <div className="inline-block bg-white rounded-2xl shadow-xl p-8 max-w-2xl">
-            <p className="text-lg text-gray-700 leading-relaxed">
+          <div className="inline-block bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl shadow-soft p-8 max-w-2xl border border-gray-100">
+            <p className="text-lg text-dark-700 leading-relaxed">
               <span className="font-bold text-primary-600">3000+</span>{' '}
-              студентов уже выбрали ОКУРМЕН для своего IT-образования
+              {t('bottom_text')}
             </p>
-            <div className="mt-6 flex items-center justify-center space-x-2">
+            <div className="mt-4 flex items-center justify-center space-x-2">
               {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-yellow-400 text-2xl">
+                <span key={i} className="text-accent-500 text-2xl">
                   ⭐
                 </span>
               ))}
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
