@@ -96,25 +96,22 @@ export default function ActivitiesSection() {
         </div>
 
         {/* Bottom Info Section */}
-        <div className="mt-16 bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8 text-center">
+        <div className="mt-16 bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8 text-center animate-fade-in">
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            Комплексное развитие
+            {t('bottom_title')}
           </h3>
           <p className="text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            ОКУРМЕН предлагает не только IT-образование, но и дополнительные
-            программы для всестороннего развития студентов. Мы создаём
-            образовательную экосистему, которая помогает развивать как
-            технические, так и личностные навыки.
+            {t('bottom_description')}
           </p>
           <div className="mt-6 flex items-center justify-center space-x-4 flex-wrap gap-2">
-            <span className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-md">
-              🎓 Образование
+            <span className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">
+              🎓 {t('badge_education')}
             </span>
-            <span className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-md">
-              💪 Развитие
+            <span className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">
+              💪 {t('badge_development')}
             </span>
-            <span className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-md">
-              🤝 Сообщество
+            <span className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">
+              🤝 {t('badge_community')}
             </span>
           </div>
         </div>

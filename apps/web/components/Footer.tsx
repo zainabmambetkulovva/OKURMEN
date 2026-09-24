@@ -11,7 +11,7 @@ export default function Footer() {
 
   const navSections = [
     {
-      title: 'Навигация',
+      title: navT('about'),
       links: [
         { label: navT('about'), href: '#about' },
         { label: navT('courses'), href: '#courses' },
@@ -20,7 +20,7 @@ export default function Footer() {
       ],
     },
     {
-      title: 'Информация',
+      title: navT('contacts'),
       links: [
         { label: navT('students'), href: '#students' },
         { label: navT('reviews'), href: '#reviews' },
@@ -69,22 +69,6 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Stats Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-y border-gray-800">
-            {[
-              { icon: '🎓', label: '3000+', sublabel: 'Студентов' },
-              { icon: '👨‍🏫', label: '50', sublabel: 'Студентов/Ментор' },
-              { icon: '💼', label: 'Apple', sublabel: 'Выпускники' },
-              { icon: '💰', label: '10K', sublabel: 'Грант' },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl mb-1">{stat.icon}</div>
-                <div className="font-bold text-white">{stat.label}</div>
-                <div className="text-xs text-gray-500">{stat.sublabel}</div>
               </div>
             ))}
           </div>

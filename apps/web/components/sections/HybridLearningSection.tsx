@@ -11,31 +11,31 @@ export default function HybridLearningSection() {
       number: 1,
       title: t('step1'),
       icon: '💻',
-      description: 'Айзада Акылбекова (США)',
+      description: t('step1_desc'),
     },
     {
       number: 2,
       title: t('step2'),
       icon: '👨‍🏫',
-      description: 'До 50 учеников на ментора',
+      description: t('step2_desc'),
     },
     {
       number: 3,
       title: t('step3'),
       icon: '🏫',
-      description: 'ОРОЗБЕКОВА, 136',
+      description: t('step3_desc'),
     },
     {
       number: 4,
       title: t('step4'),
       icon: '💬',
-      description: 'Индивидуальная поддержка',
+      description: t('step4_desc'),
     },
     {
       number: 5,
       title: t('step5'),
       icon: '📱',
-      description: 'Доступ 24/7',
+      description: t('step5_desc'),
     },
   ];
 
@@ -126,29 +126,27 @@ export default function HybridLearningSection() {
 
         {/* Info Cards */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-200">
+          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-200 hover:border-blue-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
             <div className="flex items-center space-x-3 mb-3">
               <span className="text-3xl">🌍</span>
               <h4 className="font-bold text-xl text-gray-900">
-                Онлайн-обучение
+                {t('online_title')}
               </h4>
             </div>
             <p className="text-gray-700">
-              Айзада Акылбекова проводит онлайн-уроки из США. Все уроки
-              доступны через приложение ОКУРМЕН.
+              {t('online_desc')}
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-200">
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-200 hover:border-purple-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
             <div className="flex items-center space-x-3 mb-3">
               <span className="text-3xl">🎯</span>
               <h4 className="font-bold text-xl text-gray-900">
-                АЭМ-методика
+                {t('aem_title')}
               </h4>
             </div>
             <p className="text-gray-700">
-              В обучении используется АЭМ-методика Гапыра Мадаминова для
-              максимальной эффективности.
+              {t('aem_desc')}
             </p>
           </div>
         </div>

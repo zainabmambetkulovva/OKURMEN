@@ -21,7 +21,9 @@
     "founded": "Founded in May 2022",
     "founders": "Founders",
     "students": "students completed training",
-    "age_range": "Age: 15–50 years"
+    "age_range": "Age: 15–50 years",
+    "timeline_title": "Founding of OKURMEN IT",
+    "founder_role": "Co-founder"
   },
   "why": {
     "title": "Why OKURMEN?",
@@ -56,11 +58,32 @@
     "step2": "Personal Mentor",
     "step3": "In-person Classes Twice a Week",
     "step4": "Questions and Support",
-    "step5": "Learning Through the App"
+    "step5": "Learning Through the App",
+    "step1_desc": "Aizada Akylbekova (USA)",
+    "step2_desc": "Up to 50 students per mentor",
+    "step3_desc": "OROZBEKOVA, 136",
+    "step4_desc": "Individual support",
+    "step5_desc": "24/7 access",
+    "online_title": "Online Learning",
+    "online_desc": "Aizada Akylbekova conducts online lessons from the USA. All lessons are available through the OKURMEN app.",
+    "aem_title": "AEM Methodology",
+    "aem_desc": "The training uses Gapyr Madaminov's AEM methodology for maximum efficiency."
   },
   "courses": {
     "title": "Our Courses",
-    "description": "Professional IT education programs"
+    "description": "Professional IT education programs",
+    "learn_more": "Learn More",
+    "hybrid_format": "Hybrid format",
+    "personal_mentor": "Personal mentor",
+    "format_label": "Format",
+    "classes_label": "Classes",
+    "access_label": "Access",
+    "hybrid": "Hybrid",
+    "twice_week": "2x/week",
+    "always": "24/7",
+    "info_title": "Course Information",
+    "info_description": "Detailed information about courses, training programs and prices will be added after coordination with the OKURMEN team. The course card structure is ready to be filled through the admin panel.",
+    "info_badge": "Course Information"
   },
   "activities": {
     "title": "Additional Programs",
@@ -69,11 +92,25 @@
     "literacy": "Computer Literacy",
     "talking": "Talking Club",
     "ai": "Artificial Intelligence / AI",
-    "seminars": "Gapyr Madaminov's Seminars"
+    "seminars": "Gapyr Madaminov's Seminars",
+    "bottom_title": "Comprehensive Development",
+    "bottom_description": "OKURMEN offers not only IT education, but also additional programs for comprehensive student development. We create an educational ecosystem that helps develop both technical and personal skills.",
+    "badge_education": "Education",
+    "badge_development": "Development",
+    "badge_community": "Community"
   },
   "team": {
     "title": "Our Team",
-    "description": "Team of professionals"
+    "description": "Team of professionals",
+    "founders_title": "Founders",
+    "founded_date": "May 2022",
+    "cofounder": "Co-founder",
+    "online_teacher": "Online Lessons",
+    "teacher_role": "Online Lessons Instructor",
+    "teacher_description": "Works in the USA. Conducts online lessons for OKURMEN students.",
+    "info_title": "Team Information",
+    "info_description": "Detailed information about OKURMEN employees, instructors, and mentors is being collected and will be added after coordination with the team.",
+    "info_details": "Employee card structure includes: name, position, photo, description, experience, specialization, education, and professional skills."
   },
   "mentors": {
     "title": "Mentors",
@@ -97,7 +134,15 @@
   "reviews": {
     "title": "Reviews",
     "students": "Student Reviews",
-    "parents": "Parent Reviews"
+    "parents": "Parent Reviews",
+    "student_review": "Student review",
+    "parent_review": "Parent review",
+    "info_title": "Reviews",
+    "info_description": "Student and parent reviews will be added after collection and approval from the review authors.",
+    "info_details": "The structure provides for displaying: name, photo, review text, rating, and the ability to add video reviews.",
+    "rating_quality": "Teaching Quality",
+    "rating_support": "Mentor Support",
+    "rating_results": "Results"
   },
   "laptops": {
     "title": "Laptops",

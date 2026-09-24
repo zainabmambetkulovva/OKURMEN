@@ -28,18 +28,18 @@ export default function AboutSection() {
   const founders = [
     {
       name: 'Санжарбек Мадумаров',
-      role: t('founders'),
+      role: t('founder_role'),
     },
     {
       name: 'Улукбек Бакыбек уулу',
-      role: t('founders'),
+      role: t('founder_role'),
     },
   ];
 
   return (
     <section id="about" className="py-20 bg-white">
       <Container>
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
             {t('title')}
           </h2>
@@ -52,9 +52,12 @@ export default function AboutSection() {
             <Card
               key={index}
               hover
-              className="text-center transform transition-all duration-500 hover:scale-105"
+              className="text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl animate-slide-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="text-5xl mb-4">{stat.icon}</div>
+              <div className="text-5xl mb-4 transition-transform duration-300 hover:scale-110">
+                {stat.icon}
+              </div>
               <div className="text-4xl font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent mb-2">
                 {stat.number}
               </div>
@@ -64,7 +67,7 @@ export default function AboutSection() {
         </div>
 
         {/* Founders */}
-        <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8 sm:p-12">
+        <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8 sm:p-12 animate-fade-in">
           <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">
             {t('founders')}
           </h3>
@@ -72,10 +75,10 @@ export default function AboutSection() {
             {founders.map((founder, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300"
+                className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
               >
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center text-white text-2xl font-bold transition-transform duration-300 hover:scale-110">
                     {founder.name.charAt(0)}
                   </div>
                   <div>
@@ -89,36 +92,7 @@ export default function AboutSection() {
             ))}
           </div>
         </div>
-
-        {/* Timeline Visual */}
-        <div className="mt-16 relative">
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary-200 to-accent-200"></div>
-          <div className="relative z-10 max-w-2xl mx-auto">
-            <div className="text-center bg-white rounded-2xl shadow-lg p-8 border-4 border-primary-100">
-              <div className="inline-block bg-gradient-to-r from-primary-600 to-accent-600 text-white px-6 py-2 rounded-full font-bold text-lg mb-4">
-                Май 2022
-              </div>
-              <p className="text-gray-700 text-lg font-medium">
-                Основание ОКУРМЕН IT
-              </p>
-              <div className="mt-4 flex items-center justify-center space-x-2">
-                <div className="w-3 h-3 bg-primary-600 rounded-full animate-pulse"></div>
-                <div className="w-3 h-3 bg-accent-600 rounded-full animate-pulse animation-delay-200"></div>
-                <div className="w-3 h-3 bg-purple-600 rounded-full animate-pulse animation-delay-400"></div>
-              </div>
-            </div>
-          </div>
-        </div>
       </Container>
-
-      <style jsx>{`
-        .animation-delay-200 {
-          animation-delay: 0.2s;
-        }
-        .animation-delay-400 {
-          animation-delay: 0.4s;
-        }
-      `}</style>
     </section>
   );
 }
