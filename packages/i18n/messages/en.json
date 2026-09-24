@@ -1,0 +1,120 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "courses": "Courses",
+    "learning": "Learning",
+    "team": "Team",
+    "students": "Students",
+    "reviews": "Reviews",
+    "contacts": "Contacts"
+  },
+  "hero": {
+    "title": "OKURMEN IT",
+    "subtitle": "Modern IT Education Project",
+    "description": "Hybrid format, personal mentor, and real results",
+    "cta_primary": "View Courses",
+    "cta_secondary": "About Us"
+  },
+  "about": {
+    "title": "About OKURMEN",
+    "founded": "Founded in May 2022",
+    "founders": "Founders",
+    "students": "students completed training",
+    "age_range": "Age: 15–50 years"
+  },
+  "why": {
+    "title": "Why OKURMEN?",
+    "hybrid": {
+      "title": "Hybrid Learning",
+      "description": "Online lessons and in-person classes twice a week"
+    },
+    "mentor": {
+      "title": "Personal Mentor",
+      "description": "Each student is assigned a personal mentor"
+    },
+    "access": {
+      "title": "Online Lesson Access",
+      "description": "Access to all lessons through the app"
+    },
+    "methodology": {
+      "title": "AEM Methodology",
+      "description": "Gapyr Madaminov's AEM methodology"
+    },
+    "grant": {
+      "title": "10,000 som Grant",
+      "description": "Grant for employment or project creation"
+    },
+    "activities": {
+      "title": "Development Classes",
+      "description": "Additional educational programs"
+    }
+  },
+  "hybrid": {
+    "title": "How Hybrid Learning Works",
+    "step1": "Online Lessons",
+    "step2": "Personal Mentor",
+    "step3": "In-person Classes Twice a Week",
+    "step4": "Questions and Support",
+    "step5": "Learning Through the App"
+  },
+  "courses": {
+    "title": "Our Courses",
+    "description": "Professional IT education programs"
+  },
+  "activities": {
+    "title": "Additional Programs",
+    "onugu": "Önügüü Lessons",
+    "oratory": "Public Speaking",
+    "literacy": "Computer Literacy",
+    "talking": "Talking Club",
+    "ai": "Artificial Intelligence / AI",
+    "seminars": "Gapyr Madaminov's Seminars"
+  },
+  "team": {
+    "title": "Our Team",
+    "description": "Team of professionals"
+  },
+  "mentors": {
+    "title": "Mentors",
+    "description": "Up to 50 students per mentor",
+    "role": "Mentors play a key role in OKURMEN's educational system and provide individual support to students"
+  },
+  "students": {
+    "title": "Students & Alumni",
+    "total": "3000+ students",
+    "apple": "One of our students currently works at Apple",
+    "mayor": "Alumni work at Bishkek City Hall",
+    "kulikovsky": "Alumni work at Kulikovsky",
+    "kazakhstan": "Alumni work at IT companies in Kazakhstan",
+    "freelance": "Some students earn through freelancing"
+  },
+  "grant": {
+    "title": "10,000 som Grant",
+    "description": "If a student gets a job or creates a major commercial project after completing the course, OKURMEN provides a grant of 10,000 som",
+    "conditions": "Conditions"
+  },
+  "reviews": {
+    "title": "Reviews",
+    "students": "Student Reviews",
+    "parents": "Parent Reviews"
+  },
+  "laptops": {
+    "title": "Laptops",
+    "description": "OKURMEN offers the opportunity to purchase a laptop at a convenient price",
+    "includes": "Package includes",
+    "mouse": "Mouse",
+    "bag": "Bag",
+    "charger": "Charger"
+  },
+  "contacts": {
+    "title": "Contacts",
+    "address": "Address",
+    "address_value": "OROZBEKOVA, 136",
+    "cta": "Submit Application"
+  },
+  "footer": {
+    "about": "OKURMEN is a modern IT education project founded in May 2022",
+    "rights": "All rights reserved"
+  }
+}
