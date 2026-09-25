@@ -63,6 +63,13 @@
   },
   "why": {
     "title": "Why OKURMEN?",
+    "label": "Our Advantages",
+    "subtitle": "We combine the best approaches to make IT education accessible and effective",
+    "students_label": "Students",
+    "students_text": "Trusted us",
+    "cta_label": "Ready to Start",
+    "cta_title": "Join OKURMEN today",
+    "cta_button": "Contact Us",
     "hybrid": {
       "title": "Hybrid Learning",
       "description": "Online lessons and in-person classes twice a week"
