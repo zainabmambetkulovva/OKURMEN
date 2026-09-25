@@ -107,26 +107,33 @@
     "aem_desc": "The training uses Gapyr Madaminov's AEM methodology for maximum efficiency."
   },
   "courses": {
-    "title": "Best Courses for You",
-    "description": "Professional IT education programs",
-    "label": "Our Courses",
-    "point1": "Hybrid learning format - online and offline",
-    "point2": "Personal mentor for each student",
-    "point3": "Real projects and career support",
-    "cta_all_courses": "View All Courses",
+    "title": "Our IT Programs",
+    "description": "Choose your path in the world of information technology",
+    "label": "Courses & Directions",
     "learn_more": "Learn More",
-    "hybrid_format": "Hybrid format",
-    "personal_mentor": "Personal mentor",
-    "format_label": "Format",
-    "classes_label": "Classes",
-    "access_label": "Access",
-    "hybrid": "Hybrid",
-    "twice_week": "2x/week",
-    "always": "24/7",
-    "info_title": "Course Information",
-    "info_description": "Detailed information about courses, training programs and prices will be added after coordination with the OKURMEN team. The course card structure is ready to be filled through the admin panel.",
-    "info_badge": "Course Information",
-    "info_note": "Detailed course information will be added soon. Contact us for more details."
+    "tag_popular": "Most Popular",
+    "tag_beginner": "For Beginners",
+    "frontend": {
+      "name": "Frontend Development",
+      "description": "Create modern web interfaces using HTML, CSS, JavaScript, React. Learn to build responsive and interactive websites."
+    },
+    "backend": {
+      "name": "Backend Development",
+      "description": "Server development, databases, APIs. Everything needed for the logic of modern applications."
+    },
+    "mobile": {
+      "name": "Mobile Development",
+      "description": "Create mobile apps for iOS and Android. Modern frameworks and tools."
+    },
+    "design": {
+      "name": "UI/UX Design",
+      "description": "User interface and experience design. Figma, prototyping, user research."
+    },
+    "custom": {
+      "name": "Not sure which direction to choose?",
+      "description": "Contact us for a consultation. We'll help you choose the most suitable program based on your goals and experience.",
+      "cta": "Get Consultation"
+    }
   },
   "activities": {
     "title": "Additional Programs",
