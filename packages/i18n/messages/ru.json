@@ -2,11 +2,13 @@
   "nav": {
     "home": "Главная",
     "about": "О нас",
+    "directions": "Направления",
+    "advantages": "Преимущества",
+    "reviews": "Отзывы",
     "courses": "Курсы",
     "learning": "Обучение",
     "team": "Команда",
     "students": "Студенты",
-    "reviews": "Отзывы",
     "contacts": "Контакты"
   },
   "hero": {

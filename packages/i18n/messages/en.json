@@ -2,11 +2,13 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "directions": "Programs",
+    "advantages": "Why Us",
+    "reviews": "Reviews",
     "courses": "Courses",
     "learning": "Learning",
     "team": "Team",
     "students": "Students",
-    "reviews": "Reviews",
     "contacts": "Contacts"
   },
   "hero": {

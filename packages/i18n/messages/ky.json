@@ -2,11 +2,13 @@
   "nav": {
     "home": "Башкы бет",
     "about": "Биз жөнүндө",
+    "directions": "Багыттар",
+    "advantages": "Артыкчылыктар",
+    "reviews": "Пикирлер",
     "courses": "Курстар",
     "learning": "Окуу",
     "team": "Команда",
     "students": "Студенттер",
-    "reviews": "Пикирлер",
     "contacts": "Байланыш"
   },
   "hero": {
