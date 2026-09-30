@@ -47,10 +47,10 @@ export default function TeamSection() {
         const width = window.innerWidth;
         if (width >= 1024) {
           setItemsPerView(4);
-        } else if (width >= 640) {
+        } else if (width >= 768) {
           setItemsPerView(2);
         } else {
-          setItemsPerView(1);
+          setItemsPerView(1); // Мобилде бир гана толук карточка
         }
       }
     };

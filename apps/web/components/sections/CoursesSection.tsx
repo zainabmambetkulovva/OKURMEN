@@ -204,10 +204,10 @@ export default function CoursesSection() {
                   )}
                 </div>
 
-                {/* Course Content - Увеличены padding */}
-                <div className="p-7 space-y-5">
-                  <div>
-                    <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors line-clamp-2">
+                {/* Course Content - Оптимизированный spacing */}
+                <div className="p-6 space-y-4">
+                  <div className="min-h-[80px]">
+                    <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors line-clamp-2">
                       {course.translation.title}
                     </h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
@@ -215,39 +215,37 @@ export default function CoursesSection() {
                     </p>
                   </div>
 
-                  {/* Meta Info - Улучшенная типографика */}
-                  <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400 pb-4 border-b border-slate-200 dark:border-slate-700">
-                    <span className="flex items-center gap-1.5 font-medium">
-                      <BookOpen className="w-4 h-4 text-orange-500" />
-                      {course._count.lessons} {course._count.lessons === 1 ? 'урок' : course._count.lessons < 5 ? 'урока' : 'уроков'}
+                  {/* Meta Info - Компактная версия */}
+                  <div className="flex items-center gap-4 text-xs text-slate-600 dark:text-slate-400 py-3 border-y border-slate-200 dark:border-slate-700">
+                    <span className="flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5 text-orange-500" />
+                      {course._count.lessons}
                     </span>
                     {course.totalHours > 0 && (
-                      <span className="flex items-center gap-1.5 font-medium">
-                        <Clock className="w-4 h-4 text-blue-500" />
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5 text-blue-500" />
                         {course.totalHours}ч
+                      </span>
+                    )}
+                    {course.enrolledStudents > 0 && (
+                      <span className="flex items-center gap-1.5">
+                        <Users className="w-3.5 h-3.5 text-green-500" />
+                        {course.enrolledStudents}
                       </span>
                     )}
                   </div>
 
-                  {/* Students count */}
-                  {course.enrolledStudents > 0 && (
-                    <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                      <Users className="w-4 h-4" />
-                      <span className="font-medium">{course.enrolledStudents} студентов</span>
-                    </div>
-                  )}
-
-                  {/* Price and CTA - Улучшенный стиль */}
-                  <div className="pt-2 flex items-center justify-between">
+                  {/* Price and CTA - Компактный */}
+                  <div className="flex items-center justify-between pt-1">
                     <div>
-                      <div className="text-3xl font-black text-orange-600 dark:text-orange-500">
+                      <div className="text-2xl font-black text-orange-600 dark:text-orange-500">
                         {course.price.toLocaleString()}
                       </div>
-                      <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">сом</div>
+                      <div className="text-xs font-medium text-slate-500 dark:text-slate-400">сом</div>
                     </div>
                     <button 
                       onClick={() => router.push('/courses')}
-                      className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-slate-900 dark:bg-white hover:bg-orange-600 dark:hover:bg-orange-500 text-white dark:text-slate-900 hover:dark:text-white font-bold text-sm rounded-xl transition-all group/btn shadow-lg hover:shadow-xl"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-900 dark:bg-white hover:bg-orange-600 dark:hover:bg-orange-500 text-white dark:text-slate-900 hover:dark:text-white font-bold text-sm rounded-xl transition-all group/btn shadow-md hover:shadow-lg"
                     >
                       Подробнее
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />

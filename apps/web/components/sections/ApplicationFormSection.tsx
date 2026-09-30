@@ -272,7 +272,7 @@ export default function ApplicationFormSection() {
                       className={`w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border ${
                         errors.email ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'
                       } rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-slate-900 dark:text-white placeholder-slate-400`}
-                      placeholder="example@email.com"
+                      placeholder="example@gmail.com"
                     />
                   </div>
                   {errors.email && (
