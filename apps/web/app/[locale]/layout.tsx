@@ -124,6 +124,12 @@ export default async function LocaleLayout({
         <SessionProvider>
           <ThemeProvider>
             <NextIntlClientProvider messages={messages}>
+              {/* Stars Background (visible only in dark theme) */}
+              <div className="stars-background hidden dark:block">
+                <div id="stars"></div>
+                <div id="stars2"></div>
+                <div id="stars3"></div>
+              </div>
               {children}
               <ScrollToTop />
             </NextIntlClientProvider>

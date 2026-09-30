@@ -6,3 +6,5 @@ export type { CardProps } from './Card';
 
 export { Container } from './Container';
 export type { ContainerProps } from './Container';
+
+export { default as Loading } from './Loading';
