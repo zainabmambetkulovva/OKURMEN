@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import SessionProvider from '@/components/SessionProvider';
 import ScrollToTop from '@/components/ScrollToTop';
+import AIAssistant from '@/components/AIAssistant';
 import { Montserrat, Open_Sans } from 'next/font/google';
 import '@/app/globals.css';
 
@@ -132,6 +133,7 @@ export default async function LocaleLayout({
               </div>
               {children}
               <ScrollToTop />
+              <AIAssistant />
             </NextIntlClientProvider>
           </ThemeProvider>
         </SessionProvider>

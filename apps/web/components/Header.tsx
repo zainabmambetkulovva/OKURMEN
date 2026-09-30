@@ -15,6 +15,7 @@ export default function Header() {
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   const { data: session } = useSession();
   const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const t = useTranslations('nav');
   const locale = useLocale();
   const router = useRouter();
