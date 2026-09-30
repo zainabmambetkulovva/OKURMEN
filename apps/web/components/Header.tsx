@@ -75,7 +75,7 @@ export default function Header() {
                   priority
                 />
               </div>
-              <span className="text-lg font-bold bg-gradient-to-r from-primary-400 via-primary-300 to-blue-400 bg-clip-text text-transparent">
+              <span className="text-lg font-bold bg-gradient-to-r from-[#ff6b35] via-[#ffa07a] to-[#ffe4b5] bg-clip-text text-transparent animate-gradient">
                 ОКУРМЭН
               </span>
             </button>
