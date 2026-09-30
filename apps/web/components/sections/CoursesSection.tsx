@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { BookOpen, Clock, Users, ArrowRight, TrendingUp } from 'lucide-react';
 import { useRouter } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
+import { BilbarsFloatingMascot } from '@/components/Bilbars';
+import { motion } from 'framer-motion';
 
 interface Course {
   id: string;
@@ -127,10 +129,15 @@ export default function CoursesSection() {
   }
 
   return (
-    <section id="courses" className="py-20 bg-white dark:bg-slate-900">
+    <section id="courses" className="py-20 bg-white dark:bg-slate-900 relative">
       <div className="container">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+        <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in relative">
+          {/* Билбарс над заголовком - временно отключен */}
+          {/* <div className="absolute -top-20 left-1/2 -translate-x-1/2 hidden md:block">
+            <BilbarsFloatingMascot />
+          </div> */}
+          
           <h2 className="font-display text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white mb-4">
             Популярные Курсы
           </h2>
@@ -147,10 +154,22 @@ export default function CoursesSection() {
               : getDefaultGradient(index);
 
             return (
-              <div
+              <motion.div
                 key={course.id}
-                className="group bg-white dark:bg-slate-800 rounded-2xl shadow-soft hover:shadow-premium-lg transition-all duration-300 overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-orange-200 dark:hover:border-orange-800 hover:-translate-y-2 animate-scale-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.1,
+                  ease: [0.6, 0.01, 0.05, 0.95],
+                }}
+                whileHover={{
+                  y: -8,
+                  scale: 1.03,
+                  transition: { duration: 0.3 },
+                }}
+                className="group bg-white dark:bg-slate-800 rounded-2xl shadow-soft hover:shadow-premium-lg transition-all duration-300 overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-orange-200 dark:hover:border-orange-800 cursor-pointer"
               >
                 {/* Course Header with Gradient - Больше воздуха */}
                 <div className={`relative h-52 bg-gradient-to-br ${gradient} overflow-hidden`}>
@@ -252,7 +271,7 @@ export default function CoursesSection() {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

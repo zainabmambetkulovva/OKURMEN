@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { ArrowRight, Play, Sparkles, TrendingUp, Award } from 'lucide-react';
+import BilbarsDebug from '@/components/Bilbars/BilbarsDebug';
 
 export default function HeroSection() {
   const t = useTranslations('hero');
@@ -105,40 +106,27 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Side - Улучшенные визуальные элементы */}
+          {/* Right Side - Билбарс карточка */}
           <div className="relative lg:pl-8">
             {/* Main Visual */}
             <div className="relative aspect-square max-w-lg mx-auto">
-              {/* Основная карточка */}
-              <div className="relative h-full bg-gradient-to-br from-orange-100 via-white to-blue-100 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 rounded-3xl overflow-hidden shadow-premium-lg border-2 border-orange-200/50 dark:border-slate-600/50">
+              {/* Основная карточка с Билбарсом */}
+              <div className="relative h-full bg-gradient-to-br from-orange-100 via-white to-blue-100 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 rounded-3xl overflow-visible shadow-premium-lg border-2 border-orange-200/50 dark:border-slate-600/50">
                 {/* Декоративная сетка */}
-                <div className="absolute inset-0 opacity-5">
+                <div className="absolute inset-0 opacity-5 rounded-3xl overflow-hidden">
                   <div className="absolute inset-0" style={{
                     backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
                     backgroundSize: '32px 32px'
                   }}></div>
                 </div>
                 
-                {/* Центральная иконка */}
+                {/* Билбарс DEBUG */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-blue-600 rounded-full blur-2xl opacity-50 animate-pulse"></div>
-                    <div className="relative p-8 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-3xl shadow-premium">
-                      <svg className="w-32 h-32 text-transparent" viewBox="0 0 24 24" fill="none" stroke="url(#hero-gradient)" strokeWidth="1.5">
-                        <defs>
-                          <linearGradient id="hero-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#f97316" />
-                            <stop offset="100%" stopColor="#2563eb" />
-                          </linearGradient>
-                        </defs>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-                      </svg>
-                    </div>
-                  </div>
+                  <BilbarsDebug />
                 </div>
 
                 {/* Плавающие элементы с улучшенной анимацией */}
-                <div className="absolute top-8 left-8 p-4 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-2xl shadow-premium border border-orange-200/50 dark:border-slate-700 animate-float" style={{ animationDelay: '0s' }}>
+                <div className="absolute top-8 left-8 p-4 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-2xl shadow-premium border border-orange-200/50 dark:border-slate-700 animate-float z-20" style={{ animationDelay: '0s' }}>
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
                       <svg className="w-6 h-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -152,7 +140,7 @@ export default function HeroSection() {
                   </div>
                 </div>
 
-                <div className="absolute bottom-8 right-8 p-4 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-2xl shadow-premium border border-blue-200/50 dark:border-slate-700 animate-float" style={{ animationDelay: '1s' }}>
+                <div className="absolute bottom-8 right-8 p-4 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-2xl shadow-premium border border-blue-200/50 dark:border-slate-700 animate-float z-20" style={{ animationDelay: '1s' }}>
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                       <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

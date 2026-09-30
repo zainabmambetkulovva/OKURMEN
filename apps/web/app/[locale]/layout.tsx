@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 import SessionProvider from '@/components/SessionProvider';
 import ScrollToTop from '@/components/ScrollToTop';
 import AIAssistant from '@/components/AIAssistant';
+import BilbarsIntroWrapper from '@/components/Bilbars/BilbarsIntroWrapper';
 import { Montserrat, Open_Sans } from 'next/font/google';
 import '@/app/globals.css';
 
@@ -125,6 +126,7 @@ export default async function LocaleLayout({
         <SessionProvider>
           <ThemeProvider>
             <NextIntlClientProvider messages={messages}>
+              <BilbarsIntroWrapper />
               {/* Stars Background (visible only in dark theme) */}
               <div className="stars-background hidden dark:block">
                 <div id="stars"></div>

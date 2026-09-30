@@ -11,7 +11,13 @@ export function middleware(request: NextRequest) {
       'http://localhost:3001', // Student Portal
       'http://localhost:3002', // API same origin
       'http://localhost:3003', // Admin Panel
-      'http://localhost:3004', // Employee Portal
+      'http://localhost:3004', // Employee Portal (old)
+      'http://localhost:3005', // Employee Portal (new)
+      // Production URLs
+      'https://okurmen.vercel.app',
+      'https://okurmen-admin.vercel.app',
+      'https://okurmen-employee.vercel.app',
+      // Add your custom domains here when ready
     ];
 
     // Handle preflight OPTIONS requests
