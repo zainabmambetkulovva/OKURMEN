@@ -1,30 +1,30 @@
 # Dependencies
-node_modules
+node_modules/
 .pnp
 .pnp.js
 
 # Testing
-coverage
+coverage/
 
 # Next.js
 .next/
 out/
-build
+build/
 dist/
 
-# Environment
-.env
-.env*.local
-.env.production
-
-# Debug
+# Production
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
-# Turbo
-.turbo
+# Environment variables
+.env
+.env*.local
+.env.production
+.env.development
 
 # Vercel
 .vercel
@@ -33,18 +33,31 @@ pnpm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# OS
+.DS_Store
+Thumbs.db
+
 # IDE
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.idea
+.vscode/
+.idea/
 *.swp
 *.swo
 *~
-.DS_Store
+
+# Misc
+*.pem
+.cache/
+.turbo/
+.parcel-cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
 
 # Prisma
-**/migrations/**/*.db
-**/migrations/**/*.db-journal
+prisma/migrations/
+prisma/*.db
+
+# Railway
+.railway/
