@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { ArrowRight, Play, Sparkles, TrendingUp, Award } from 'lucide-react';
-import BilbarsDebug from '@/components/Bilbars/BilbarsDebug';
+import BilbarsHeroCard from '@/components/Bilbars/BilbarsHeroCard';
 
 export default function HeroSection() {
   const t = useTranslations('hero');
@@ -120,9 +120,9 @@ export default function HeroSection() {
                   }}></div>
                 </div>
                 
-                {/* Билбарс DEBUG */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <BilbarsDebug />
+                {/* Билбарс Hero Card - автоматически меняющийся */}
+                <div className="absolute inset-0">
+                  <BilbarsHeroCard />
                 </div>
 
                 {/* Плавающие элементы с улучшенной анимацией */}

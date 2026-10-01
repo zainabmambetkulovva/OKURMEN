@@ -133,10 +133,10 @@ export default function CoursesSection() {
       <div className="container">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in relative">
-          {/* Билбарс над заголовком - временно отключен */}
-          {/* <div className="absolute -top-20 left-1/2 -translate-x-1/2 hidden md:block">
+          {/* Билбарс над заголовком */}
+          <div className="absolute -top-20 left-1/2 -translate-x-1/2 hidden md:block z-10">
             <BilbarsFloatingMascot />
-          </div> */}
+          </div>
           
           <h2 className="font-display text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white mb-4">
             Популярные Курсы
