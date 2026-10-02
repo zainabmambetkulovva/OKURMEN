@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { User, ChevronLeft, ChevronRight, Linkedin, Mail } from 'lucide-react';
+import { User, ChevronLeft, ChevronRight, Mail } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useLocale } from 'next-intl';
 
