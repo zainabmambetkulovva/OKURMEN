@@ -1,0 +1,148 @@
+{
+  "name": "OKURMEN Design System",
+  "version": "1.0.0",
+  "description": "Premium Modern EdTech Design System - WHITE + BLUE + ORANGE",
+  
+  "colors": {
+    "primary": {
+      "50": "#E8F2FF",
+      "100": "#D0E5FF",
+      "200": "#A3CCFF",
+      "300": "#75B3FF",
+      "400": "#4799FF",
+      "500": "#1A80FF",
+      "600": "#0066E6",
+      "700": "#004DB3",
+      "800": "#003380",
+      "900": "#001A4D"
+    },
+    "accent": {
+      "50": "#FFF4E6",
+      "100": "#FFE9CC",
+      "200": "#FFD399",
+      "300": "#FFBD66",
+      "400": "#FFA733",
+      "500": "#FF9100",
+      "600": "#E68200",
+      "700": "#B36500",
+      "800": "#804800",
+      "900": "#4D2B00"
+    },
+    "dark": {
+      "50": "#F0F4F8",
+      "100": "#D9E2EC",
+      "200": "#BCCCDC",
+      "300": "#9FB3C8",
+      "400": "#829AB1",
+      "500": "#627D98",
+      "600": "#486581",
+      "700": "#334E68",
+      "800": "#243B53",
+      "900": "#102A43"
+    },
+    "semantic": {
+      "white": "#FFFFFF",
+      "success": "#1A80FF",
+      "warning": "#FF9100",
+      "error": "#EF4444",
+      "info": "#1A80FF"
+    }
+  },
+  
+  "typography": {
+    "fontFamily": {
+      "sans": "'Inter', system-ui, sans-serif"
+    },
+    "fontSize": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "3.75rem"
+    },
+    "fontWeight": {
+      "normal": 400,
+      "semibold": 600,
+      "bold": 700
+    },
+    "lineHeight": {
+      "tight": 1.25,
+      "snug": 1.375,
+      "normal": 1.5,
+      "relaxed": 1.625
+    },
+    "letterSpacing": {
+      "tight": "-0.02em",
+      "normal": "0",
+      "wide": "0.02em"
+    }
+  },
+  
+  "spacing": {
+    "0": "0px",
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "8": "32px",
+    "10": "40px",
+    "12": "48px",
+    "16": "64px",
+    "20": "80px",
+    "24": "96px",
+    "32": "128px"
+  },
+  
+  "borderRadius": {
+    "sm": "4px",
+    "md": "6px",
+    "lg": "8px",
+    "xl": "12px",
+    "2xl": "16px",
+    "3xl": "24px",
+    "full": "9999px"
+  },
+  
+  "shadows": {
+    "soft": "0 2px 15px rgba(26, 128, 255, 0.08)",
+    "soft-lg": "0 10px 40px rgba(26, 128, 255, 0.12)",
+    "orange": "0 4px 20px rgba(255, 145, 0, 0.15)"
+  },
+  
+  "breakpoints": {
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1280px",
+    "2xl": "1536px"
+  },
+  
+  "transitions": {
+    "fast": "200ms",
+    "default": "300ms",
+    "slow": "500ms",
+    "verySlow": "600ms"
+  },
+  
+  "animations": {
+    "fadeIn": {
+      "duration": "0.6s",
+      "timingFunction": "ease-out"
+    },
+    "slideUp": {
+      "duration": "0.6s",
+      "timingFunction": "ease-out"
+    },
+    "scaleIn": {
+      "duration": "0.4s",
+      "timingFunction": "ease-out"
+    }
+  }
+}

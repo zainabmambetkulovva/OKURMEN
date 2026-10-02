@@ -2,29 +2,74 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "directions": "Programs",
+    "advantages": "Why Us",
+    "reviews": "Reviews",
     "courses": "Courses",
     "learning": "Learning",
     "team": "Team",
     "students": "Students",
-    "reviews": "Reviews",
     "contacts": "Contacts"
   },
   "hero": {
     "title": "OKURMEN IT",
+    "title_highlight": "Transform Your Future",
     "subtitle": "Modern IT Education Project",
     "description": "Hybrid format, personal mentor, and real results",
+    "badge": "Modern IT Education",
     "cta_primary": "View Courses",
-    "cta_secondary": "About Us"
+    "cta_secondary": "About Us",
+    "stat_students": "Students",
+    "stat_years": "Years",
+    "stat_online": "Online Access",
+    "visual_badge": "Online Learning",
+    "visual_text": "Modern IT Education",
+    "card1_title": "Certificate",
+    "card1_subtitle": "Upon completion",
+    "card2_title": "Personal Mentor",
+    "card2_subtitle": "Individual support",
+    "card_mentor": "Personal Mentor",
+    "card_mentor_sub": "Up to 50 students",
+    "card_hybrid": "Hybrid Format",
+    "card_hybrid_sub": "Online + Offline"
+  },
+  "features": {
+    "online_title": "Online Format",
+    "online_desc": "Study from anywhere in the world",
+    "mentor_title": "Personal Mentor",
+    "mentor_desc": "Individual support and guidance",
+    "app_title": "OKURMEN App",
+    "app_desc": "Access to lessons 24/7",
+    "certificate_title": "Certificate",
+    "certificate_desc": "Upon course completion",
+    "grant_title": "10,000 som Grant",
+    "grant_desc": "For employment or project"
   },
   "about": {
     "title": "About OKURMEN",
-    "founded": "Founded in May 2022",
+    "label": "Who We Are",
+    "headline": "Modern IT education for everyone",
+    "description": "Founded in May 2022, OKURMEN is a hybrid IT education project that combines online lessons with personal mentorship to deliver real results.",
+    "point1": "Hybrid format: online lessons + in-person classes",
+    "point2": "Personal mentor for each student (up to 50)",
+    "point3": "3000+ students have completed our programs",
+    "founded": "Founded",
+    "founded_date": "May 2022",
     "founders": "Founders",
     "students": "students completed training",
-    "age_range": "Age: 15–50 years"
+    "age_range": "Age: 15–50 years",
+    "timeline_title": "Founding of OKURMEN IT",
+    "founder_role": "Co-founder"
   },
   "why": {
     "title": "Why OKURMEN?",
+    "label": "Our Advantages",
+    "subtitle": "We combine the best approaches to make IT education accessible and effective",
+    "students_label": "Students",
+    "students_text": "Trusted us",
+    "cta_label": "Ready to Start",
+    "cta_title": "Join OKURMEN today",
+    "cta_button": "Contact Us",
     "hybrid": {
       "title": "Hybrid Learning",
       "description": "Online lessons and in-person classes twice a week"
@@ -48,7 +93,8 @@
     "activities": {
       "title": "Development Classes",
       "description": "Additional educational programs"
-    }
+    },
+    "bottom_text": "students have already chosen OKURMEN for their IT education"
   },
   "hybrid": {
     "title": "How Hybrid Learning Works",
@@ -56,11 +102,45 @@
     "step2": "Personal Mentor",
     "step3": "In-person Classes Twice a Week",
     "step4": "Questions and Support",
-    "step5": "Learning Through the App"
+    "step5": "Learning Through the App",
+    "step1_desc": "Aizada Akylbekova (USA)",
+    "step2_desc": "Up to 50 students per mentor",
+    "step3_desc": "OROZBEKOVA, 136",
+    "step4_desc": "Individual support",
+    "step5_desc": "24/7 access",
+    "online_title": "Online Learning",
+    "online_desc": "Aizada Akylbekova conducts online lessons from the USA. All lessons are available through the OKURMEN app.",
+    "aem_title": "AEM Methodology",
+    "aem_desc": "The training uses Gapyr Madaminov's AEM methodology for maximum efficiency."
   },
   "courses": {
-    "title": "Our Courses",
-    "description": "Professional IT education programs"
+    "title": "Our IT Programs",
+    "description": "Choose your path in the world of information technology",
+    "label": "Courses & Directions",
+    "learn_more": "Learn More",
+    "tag_popular": "Most Popular",
+    "tag_beginner": "For Beginners",
+    "frontend": {
+      "name": "Frontend Development",
+      "description": "Create modern web interfaces using HTML, CSS, JavaScript, React. Learn to build responsive and interactive websites."
+    },
+    "backend": {
+      "name": "Backend Development",
+      "description": "Server development, databases, APIs. Everything needed for the logic of modern applications."
+    },
+    "mobile": {
+      "name": "Mobile Development",
+      "description": "Create mobile apps for iOS and Android. Modern frameworks and tools."
+    },
+    "design": {
+      "name": "UI/UX Design",
+      "description": "User interface and experience design. Figma, prototyping, user research."
+    },
+    "custom": {
+      "name": "Not sure which direction to choose?",
+      "description": "Contact us for a consultation. We'll help you choose the most suitable program based on your goals and experience.",
+      "cta": "Get Consultation"
+    }
   },
   "activities": {
     "title": "Additional Programs",
@@ -69,11 +149,25 @@
     "literacy": "Computer Literacy",
     "talking": "Talking Club",
     "ai": "Artificial Intelligence / AI",
-    "seminars": "Gapyr Madaminov's Seminars"
+    "seminars": "Gapyr Madaminov's Seminars",
+    "bottom_title": "Comprehensive Development",
+    "bottom_description": "OKURMEN offers not only IT education, but also additional programs for comprehensive student development. We create an educational ecosystem that helps develop both technical and personal skills.",
+    "badge_education": "Education",
+    "badge_development": "Development",
+    "badge_community": "Community"
   },
   "team": {
     "title": "Our Team",
-    "description": "Team of professionals"
+    "description": "Team of professionals",
+    "founders_title": "Founders",
+    "founded_date": "May 2022",
+    "cofounder": "Co-founder",
+    "online_teacher": "Online Lessons",
+    "teacher_role": "Online Lessons Instructor",
+    "teacher_description": "Works in the USA. Conducts online lessons for OKURMEN students.",
+    "info_title": "Team Information",
+    "info_description": "Detailed information about OKURMEN employees, instructors, and mentors is being collected and will be added after coordination with the team.",
+    "info_details": "Employee card structure includes: name, position, photo, description, experience, specialization, education, and professional skills."
   },
   "mentors": {
     "title": "Mentors",
@@ -85,19 +179,44 @@
     "total": "3000+ students",
     "apple": "One of our students currently works at Apple",
     "mayor": "Alumni work at Bishkek City Hall",
+    "mayor_company": "Bishkek City Hall",
     "kulikovsky": "Alumni work at Kulikovsky",
     "kazakhstan": "Alumni work at IT companies in Kazakhstan",
-    "freelance": "Some students earn through freelancing"
+    "kazakhstan_company": "IT Companies in Kazakhstan",
+    "freelance": "Some students earn through freelancing",
+    "freelance_company": "Freelance",
+    "employment_title": "Employment",
+    "employment_desc": "Graduates work in major companies and government institutions",
+    "international_title": "International Experience",
+    "international_desc": "Students get opportunities to work in companies across different countries",
+    "growth_title": "Career Growth",
+    "growth_desc": "From student to IT industry professional",
+    "bottom_highlight": "Every success story",
+    "bottom_text": "starts with the first step. Join OKURMEN and become part of our growing community of IT professionals."
   },
   "grant": {
     "title": "10,000 som Grant",
     "description": "If a student gets a job or creates a major commercial project after completing the course, OKURMEN provides a grant of 10,000 som",
-    "conditions": "Conditions"
+    "conditions": "Conditions",
+    "currency": "som",
+    "badge": "For Graduates",
+    "condition1": "Get employed after completing the course",
+    "condition2": "Or create a major commercial project",
+    "cta": "Learn More",
+    "bottom_text": "Your success is our goal"
   },
   "reviews": {
     "title": "Reviews",
     "students": "Student Reviews",
-    "parents": "Parent Reviews"
+    "parents": "Parent Reviews",
+    "student_review": "Student review",
+    "parent_review": "Parent review",
+    "info_title": "Reviews",
+    "info_description": "Student and parent reviews will be added after collection and approval from the review authors.",
+    "info_details": "The structure provides for displaying: name, photo, review text, rating, and the ability to add video reviews.",
+    "rating_quality": "Teaching Quality",
+    "rating_support": "Mentor Support",
+    "rating_results": "Results"
   },
   "laptops": {
     "title": "Laptops",
@@ -123,6 +242,8 @@
   },
   "footer": {
     "about": "OKURMEN is a modern IT education project founded in May 2022",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "navigation": "Navigation",
+    "info": "About Us"
   }
 }
