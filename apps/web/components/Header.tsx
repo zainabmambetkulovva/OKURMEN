@@ -1,37 +1,17 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/routing';
-import { useSession, signOut } from 'next-auth/react';
-import { Sun, Moon } from 'lucide-react';
-import { useTheme } from '@/contexts/ThemeContext';
-import Image from 'next/image';
-import AuthModal from './AuthModal';
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
-  const { data: session } = useSession();
-  const { theme, toggleTheme } = useTheme();
   const t = useTranslations('nav');
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
 
-<<<<<<< HEAD
-  const navItems = [
-    { key: 'courses', href: '#courses' },
-    { key: 'about', href: '#about' },
-    { key: 'team', href: '#team' },
-    { key: 'contacts', href: '#contacts' },
-  ];
-
-  const languages = [
-    { code: 'ky', label: 'KY' },
-    { code: 'ru', label: 'RU' },
-=======
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -50,9 +30,8 @@ export default function Header() {
   ];
 
   const languages = [
-    { code: 'ky', label: 'ҚР' },
-    { code: 'ru', label: 'РУ' },
->>>>>>> feature/landing
+    { code: 'ky', label: '╥Ü╨á' },
+    { code: 'ru', label: '╨á╨ú' },
     { code: 'en', label: 'EN' },
   ];
 
@@ -62,51 +41,6 @@ export default function Header() {
 
   const scrollToSection = (href: string) => {
     if (href === '#') {
-<<<<<<< HEAD
-      window.scrollTo({ top: 0 });
-    } else {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView();
-      }
-    }
-    setIsMobileMenuOpen(false);
-  };
-
-  const openAuthModal = (mode: 'login' | 'register') => {
-    setAuthMode(mode);
-    setIsAuthModalOpen(true);
-  };
-
-  return (
-    <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-primary-500 dark:bg-dark-800 shadow-md transition-colors duration-200">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo with Image */}
-            <button
-              onClick={() => scrollToSection('#')}
-              className="flex items-center gap-2 hover:opacity-90 transition-opacity duration-200"
-              aria-label="OKURMEN"
-            >
-              <div className="relative w-10 h-10">
-                <Image
-                  src="/img/logo.okurmen.jpg"
-                  alt="OKURMEN Logo"
-                  width={40}
-                  height={40}
-                  className="object-contain rounded-lg"
-                  priority
-                />
-              </div>
-              <span className="text-lg font-bold bg-gradient-to-r from-[#ff6b35] via-[#ffa07a] to-[#ffe4b5] bg-clip-text text-transparent animate-gradient">
-                ОКУРМЭН
-              </span>
-            </button>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-=======
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       const element = document.querySelector(href);
@@ -133,7 +67,7 @@ export default function Header() {
             className="flex-shrink-0 text-xl font-bold text-primary-600 hover:text-primary-700 transition-colors duration-200"
             aria-label="OKURMEN Home"
           >
-            ОКУРМЕН
+            ╨₧╨Ü╨ú╨á╨£╨ò╨¥
           </button>
 
           {/* Desktop Navigation - Center */}
@@ -213,51 +147,17 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-gray-100 py-4">
             <nav className="flex flex-col space-y-1">
->>>>>>> feature/landing
               {navItems.map((item) => (
                 <button
                   key={item.key}
                   onClick={() => scrollToSection(item.href)}
-<<<<<<< HEAD
-                  className="text-sm font-medium text-white/90 hover:text-white transition-colors duration-200"
-=======
                   className="text-left px-3 py-2.5 text-sm font-medium text-dark-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
->>>>>>> feature/landing
                 >
                   {t(item.key as any)}
                 </button>
               ))}
-              <button
-                onClick={() => scrollToSection('#contacts')}
-                className="text-sm font-medium text-white/90 hover:text-white transition-colors duration-200"
-              >
-                Заявка
-              </button>
             </nav>
 
-<<<<<<< HEAD
-            {/* Desktop Actions */}
-            <div className="hidden lg:flex items-center space-x-3">
-              {/* Theme Toggle */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/10"
-                aria-label={theme === 'light' ? 'Темная тема' : 'Светлая тема'}
-              >
-                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-              </button>
-
-              {/* Language Switcher - Buttons */}
-              <div className="flex items-center gap-2">
-                {languages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => handleLanguageChange(lang.code)}
-                    className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 ${
-                      locale === lang.code
-                        ? 'bg-white text-primary-600 shadow-sm'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
-=======
             {/* Mobile Language + CTA */}
             <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
               {/* Language Switcher */}
@@ -273,7 +173,6 @@ export default function Header() {
                       locale === lang.code
                         ? 'bg-primary-600 text-white'
                         : 'bg-gray-100 text-dark-600'
->>>>>>> feature/landing
                     }`}
                   >
                     {lang.label}
@@ -281,148 +180,6 @@ export default function Header() {
                 ))}
               </div>
 
-<<<<<<< HEAD
-              {/* Auth Buttons or User Menu */}
-              {session?.user ? (
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                      <span className="text-sm font-semibold text-white">
-                        {session.user.name?.charAt(0) || session.user.email?.charAt(0)}
-                      </span>
-                    </div>
-                    <span className="text-sm font-medium text-white">
-                      {session.user.name || session.user.email}
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => signOut()}
-                    className="text-sm font-medium text-white/80 hover:text-white transition-colors"
-                  >
-                    Выйти
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <button
-                    onClick={() => openAuthModal('login')}
-                    className="px-5 py-2 text-sm font-medium text-white hover:bg-white/10 rounded-lg transition-all duration-200"
-                  >
-                    Войти
-                  </button>
-                  <button
-                    onClick={() => openAuthModal('register')}
-                    className="px-5 py-2 bg-white text-primary-600 text-sm font-semibold rounded-lg hover:bg-white/95 transition-all duration-200 shadow-md"
-                  >
-                    Регистрация
-                  </button>
-                </>
-              )}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-white"
-              aria-label="Menu"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                {isMobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="lg:hidden border-t border-white/20 py-4">
-              <nav className="flex flex-col space-y-1">
-                {navItems.map((item) => (
-                  <button
-                    key={item.key}
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-left px-3 py-2 text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 rounded"
-                  >
-                    {t(item.key as any)}
-                  </button>
-                ))}
-                <button
-                  onClick={() => {
-                    openAuthModal('register');
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="text-left px-3 py-2 text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 rounded"
-                >
-                  Заявка
-                </button>
-              </nav>
-              
-              <div className="mt-4 pt-4 border-t border-white/20 space-y-3">
-                {/* Language Switcher Mobile */}
-                <div className="flex gap-2">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        handleLanguageChange(lang.code);
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className={`px-3 py-1.5 text-sm font-medium rounded ${
-                        locale === lang.code ? 'bg-white text-primary-600' : 'bg-white/20 text-white'
-                      }`}
-                    >
-                      {lang.label}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Auth Buttons Mobile */}
-                {session?.user ? (
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 px-3 py-2">
-                      <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                        <span className="text-sm font-semibold text-white">
-                          {session.user.name?.charAt(0) || session.user.email?.charAt(0)}
-                        </span>
-                      </div>
-                      <span className="text-sm font-medium text-white">
-                        {session.user.name || session.user.email}
-                      </span>
-                    </div>
-                    <button
-                      onClick={() => signOut()}
-                      className="w-full px-4 py-2 text-sm font-medium text-white bg-white/10 rounded-lg"
-                    >
-                      Выйти
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => {
-                        openAuthModal('login');
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="flex-1 px-4 py-2 text-sm font-medium text-white bg-white/10 rounded-lg"
-                    >
-                      Войти
-                    </button>
-                    <button
-                      onClick={() => {
-                        openAuthModal('register');
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="flex-1 px-4 py-2 bg-white text-primary-600 text-sm font-semibold rounded-lg"
-                    >
-                      Регистрация
-                    </button>
-                  </div>
-                )}
-              </div>
-=======
               {/* Mobile CTA */}
               <button
                 onClick={() => scrollToSection('#contacts')}
@@ -430,18 +187,10 @@ export default function Header() {
               >
                 {t('contacts')}
               </button>
->>>>>>> feature/landing
             </div>
-          )}
-        </div>
-      </header>
-
-      {/* Auth Modal */}
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        initialMode={authMode}
-      />
-    </>
+          </div>
+        )}
+      </div>
+    </header>
   );
 }
