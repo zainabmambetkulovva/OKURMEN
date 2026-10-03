@@ -1,0 +1,58 @@
+# API Environment Variables для Vercel
+# Скопируйте и заполните перед деплоем
+
+# ========================================
+# DATABASE (Neon PostgreSQL)
+# ========================================
+DATABASE_URL=postgresql://username:password@ep-xxxx.us-east-2.aws.neon.tech/okurmen?sslmode=require
+
+# ========================================
+# JWT SECRETS (сгенерировать в PowerShell!)
+# ========================================
+# В PowerShell выполните 3 раза:
+# -join ((65..90) + (97..122) + (48..57) | Get-Random -Count 32 | ForEach-Object {[char]$_})
+
+JWT_SECRET=ваш_сгенерированный_секрет_32_символа
+JWT_REFRESH_SECRET=другой_сгенерированный_секрет_32_символа
+NEXTAUTH_SECRET=третий_сгенерированный_секрет_32_символа
+
+# ========================================
+# UPSTASH REDIS (для Rate Limiting)
+# ========================================
+UPSTASH_REDIS_REST_URL=https://xxxxx.upstash.io
+UPSTASH_REDIS_REST_TOKEN=ваш_токен_из_upstash
+ENABLE_RATE_LIMIT=true
+
+# ========================================
+# RATE LIMITS (можно оставить по умолчанию)
+# ========================================
+RATE_LIMIT_LOGIN_MAX=5
+RATE_LIMIT_LOGIN_WINDOW=900
+RATE_LIMIT_2FA_REQUEST_MAX=3
+RATE_LIMIT_2FA_REQUEST_WINDOW=900
+RATE_LIMIT_2FA_VERIFY_MAX=5
+RATE_LIMIT_2FA_VERIFY_WINDOW=900
+RATE_LIMIT_PUBLIC_MAX=100
+RATE_LIMIT_PUBLIC_WINDOW=60
+RATE_LIMIT_AUTH_MAX=300
+RATE_LIMIT_AUTH_WINDOW=60
+
+# ========================================
+# EMAIL (Gmail для 2FA)
+# ========================================
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=ваш_gmail@gmail.com
+EMAIL_PASSWORD=ваш_app_password_16_символов
+
+# ========================================
+# FRONTEND URLS (ВРЕМЕННО, обновим после деплоя)
+# ========================================
+WEB_URL=https://okurmen-web.vercel.app
+ADMIN_URL=https://okurmen-admin.vercel.app
+EMPLOYEE_URL=https://okurmen-employee.vercel.app
+
+# ========================================
+# AUTO-SET BY VERCEL (не добавлять вручную)
+# ========================================
+# NODE_ENV=production

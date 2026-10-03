@@ -1,0 +1,29 @@
+# WEB Environment Variables для Vercel
+# Скопируйте и заполните после деплоя API
+
+# ========================================
+# NEXTAUTH
+# ========================================
+NEXTAUTH_URL=https://okurmen-web-xxxx.vercel.app
+NEXTAUTH_SECRET=тот_же_секрет_что_в_API
+
+# ========================================
+# DATABASE (та же что в API)
+# ========================================
+DATABASE_URL=postgresql://username:password@ep-xxxx.us-east-2.aws.neon.tech/okurmen?sslmode=require
+
+# ========================================
+# API URL (получите после деплоя API!)
+# ========================================
+NEXT_PUBLIC_API_URL=https://okurmen-api-xxxx.vercel.app
+
+# ========================================
+# GOOGLE OAUTH
+# ========================================
+GOOGLE_CLIENT_ID=ваш_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=GOCSPX-ваш_client_secret
+
+# ========================================
+# AUTO-SET BY VERCEL
+# ========================================
+# NODE_ENV=production
