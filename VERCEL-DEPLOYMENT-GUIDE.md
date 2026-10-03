@@ -1,160 +1,108 @@
-# 🚀 OKURMEN - Полное Руководство по Деплою на Vercel
+# 🚀 Vercel Deployment Guide - OKURMEN
 
-## 📋 Предварительные Требования
-
-### ✅ Что нужно иметь:
-1. **Vercel Account** - https://vercel.com/signup
-2. **GitHub Repository** - код должен быть в GitHub
-3. **Neon Database** - https://neon.tech (PostgreSQL)
-4. **Upstash Redis** - https://upstash.com (для rate limiting)
-5. **Google OAuth** - https://console.cloud.google.com
-6. **Gmail App Password** - для 2FA email
+## 🎯 Полное руководство по деплою на Vercel
 
 ---
 
-## 🎯 Архитектура Деплоя
+## ⚠️ ВАЖНО: Monorepo Configuration
 
-```
-OKURMEN Monorepo
-├── apps/web      → okurmen.vercel.app        (Main Website)
-├── apps/api      → okurmen-api.vercel.app    (Backend API)
-├── apps/admin    → okurmen-admin.vercel.app  (Admin Panel)
-├── apps/employee → okurmen-employee.vercel.app (Employee Panel)
-└── apps/student  → okurmen-student.vercel.app (Student Panel)
-```
-
-**Каждое приложение деплоится ОТДЕЛЬНО!**
+Этот проект использует **Turborepo monorepo** структуру. Vercel требует специальной настройки.
 
 ---
 
-## 📝 Шаг 1: Подготовка Базы Данных (Neon)
+## 📋 Pre-Deployment Checklist
 
-### 1.1 Создать проект в Neon
-1. Зайти на https://console.neon.tech
+### 1. External Services Setup (30 мин)
+
+#### A. Neon Database (PostgreSQL)
+1. Зайти на https://neon.tech
 2. Create New Project
-3. Название: `okurmen-production`
-4. Region: выбрать ближайший (например, AWS US East)
+3. Name: `okurmen-production`
+4. Region: выбрать ближайший
+5. Скопировать `DATABASE_URL`
+   ```
+   postgresql://username:password@ep-xxxx.us-east-2.aws.neon.tech/okurmen?sslmode=require
+   ```
 
-### 1.2 Получить Connection String
-```
-postgresql://username:password@ep-xxxx.us-east-2.aws.neon.tech/okurmen?sslmode=require
-```
-
-### 1.3 Применить миграции (локально)
-```bash
-# В корне проекта
-cd packages/database
-DATABASE_URL="postgresql://..." npx prisma migrate deploy
-DATABASE_URL="postgresql://..." npx prisma db seed
-```
-
----
-
-## 🔐 Шаг 2: Настроить Upstash Redis
-
-### 2.1 Создать базу
-1. https://console.upstash.com
+#### B. Upstash Redis (Rate Limiting)
+1. Зайти на https://console.upstash.com
 2. Create Database
-3. Name: `okurmen-rate-limit`
-4. Type: Regional
-5. Region: выбрать ближайший
+3. Name: `okurmen-redis`
+4. Region: выбрать ближайший
+5. Скопировать:
+   - `UPSTASH_REDIS_REST_URL`
+   - `UPSTASH_REDIS_REST_TOKEN`
 
-### 2.2 Получить credentials
-- REST URL: `https://xxxxx.upstash.io`
-- REST Token: `AxxxxxxxxxxxxxxxxxxxxxxxxxxxxQ`
+#### C. Google OAuth
+1. Зайти на https://console.cloud.google.com
+2. Create Project: `okurmen`
+3. APIs & Services → Credentials
+4. Create OAuth 2.0 Client ID
+5. Application type: Web application
+6. Authorized redirect URIs (временно):
+   ```
+   http://localhost:3000/api/auth/callback/google
+   ```
+7. Скопировать:
+   - `GOOGLE_CLIENT_ID`
+   - `GOOGLE_CLIENT_SECRET`
 
----
-
-## 🔑 Шаг 3: Настроить Google OAuth
-
-### 3.1 Создать проект
-1. https://console.cloud.google.com
-2. Create Project → `OKURMEN`
-
-### 3.2 Настроить OAuth
-1. APIs & Services → Credentials
-2. Create Credentials → OAuth 2.0 Client ID
-3. Application type: Web application
-4. Name: `OKURMEN Web`
-
-### 3.3 Authorized redirect URIs
-Добавить (замените домен на ваш):
-```
-https://okurmen.vercel.app/api/auth/callback/google
-https://okurmen-admin.vercel.app/api/auth/callback/google
-https://okurmen-employee.vercel.app/api/auth/callback/google
-```
-
-### 3.4 Сохранить credentials
-- Client ID: `xxxxx.apps.googleusercontent.com`
-- Client Secret: `GOCSPX-xxxxx`
-
----
-
-## 📧 Шаг 4: Gmail App Password
-
+#### D. Gmail App Password (для 2FA)
 1. Google Account → Security
-2. 2-Step Verification (включить если не включено)
+2. 2-Step Verification → ON
 3. App passwords
-4. Select app: Mail
-5. Select device: Other → `OKURMEN API`
-6. Generate → Сохранить пароль
+4. Generate for "Mail"
+5. Скопировать 16-символьный пароль
 
----
-
-## 🔐 Шаг 5: Генерация Секретов
-
-Запустите в PowerShell:
+#### E. Generate Secrets
+В PowerShell выполнить **3 раза**:
 ```powershell
-# JWT_SECRET
--join ((65..90) + (97..122) + (48..57) | Get-Random -Count 32 | ForEach-Object {[char]$_})
-
-# JWT_REFRESH_SECRET
--join ((65..90) + (97..122) + (48..57) | Get-Random -Count 32 | ForEach-Object {[char]$_})
-
-# NEXTAUTH_SECRET
 -join ((65..90) + (97..122) + (48..57) | Get-Random -Count 32 | ForEach-Object {[char]$_})
 ```
 
-Сохраните все 3 секрета!
+Сохранить:
+- `JWT_SECRET` = `_____________________________`
+- `JWT_REFRESH_SECRET` = `_____________________________`
+- `NEXTAUTH_SECRET` = `_____________________________`
 
 ---
 
-## 🚀 Шаг 6: Деплой API (Первым!)
+## 🚀 Deployment Steps
 
-### 6.1 Создать проект в Vercel
-1. https://vercel.com/new
-2. Import Git Repository
-3. Select: ваш репозиторий OKURMEN
-4. Project Name: `okurmen-api`
-5. Framework Preset: Next.js
-6. Root Directory: `apps/api` ✅ ВАЖНО!
+### ВАЖНО: Порядок деплоя!
+1. **API** → получить URL
+2. **Web** → использовать API URL
+3. Admin/Employee/Student → использовать API URL
 
-### 6.2 Build Settings
-```
-Build Command: npm run build
-Output Directory: .next
-Install Command: npm install
-```
+---
 
-### 6.3 Environment Variables
-Добавить ВСЕ эти переменные:
+## 📦 1. Deploy API (Backend)
+
+### Шаг 1: Create New Project
+1. Vercel Dashboard → **Add New** → **Project**
+2. Import Git Repository: `zainabmambetkulovva/OKURMEN`
+3. Project Settings:
+   - **Project Name**: `okurmen-api`
+   - **Root Directory**: `apps/api` ✅
+   - **Framework Preset**: Next.js
+   - **Build Command**: `npm run build`
+   - **Install Command**: `npm install`
+
+### Шаг 2: Environment Variables
+Добавить ВСЕ переменные (Settings → Environment Variables):
 
 ```env
 # Database
 DATABASE_URL=postgresql://user:pass@ep-xxx.neon.tech/okurmen?sslmode=require
 
-# JWT
-JWT_SECRET=ваш-сгенерированный-секрет-32-chars
-JWT_REFRESH_SECRET=ваш-сгенерированный-секрет-32-chars
-NEXTAUTH_SECRET=ваш-сгенерированный-секрет-32-chars
+# JWT Secrets (сгенерированные!)
+JWT_SECRET=<ваш-секрет-32-chars>
+JWT_REFRESH_SECRET=<ваш-секрет-32-chars>
+NEXTAUTH_SECRET=<ваш-секрет-32-chars>
 
-# Node
-NODE_ENV=production
-
-# Redis (Upstash)
+# Upstash Redis
 UPSTASH_REDIS_REST_URL=https://xxxxx.upstash.io
-UPSTASH_REDIS_REST_TOKEN=ваш-токен
+UPSTASH_REDIS_REST_TOKEN=<ваш-токен>
 ENABLE_RATE_LIMIT=true
 
 # Rate Limits
@@ -173,26 +121,28 @@ RATE_LIMIT_AUTH_WINDOW=60
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USER=your-email@gmail.com
-EMAIL_PASSWORD=ваш-app-password
+EMAIL_PASSWORD=<app-password-16-chars>
 
-# Frontend URLs (заполним после деплоя web)
-WEB_URL=https://okurmen.vercel.app
+# Frontend URLs (пока временные, обновим позже)
+WEB_URL=https://okurmen-web.vercel.app
 ADMIN_URL=https://okurmen-admin.vercel.app
 EMPLOYEE_URL=https://okurmen-employee.vercel.app
+
+# Auto-set by Vercel
+NODE_ENV=production
 ```
 
-### 6.4 Deploy
-1. Click **Deploy**
-2. Дождаться успешного деплоя
-3. Получить URL: `https://okurmen-api-xxxx.vercel.app`
-4. **Сохранить этот URL!**
+### Шаг 3: Deploy
+1. Нажать **Deploy**
+2. Подождать ~2-3 минуты
+3. **Сохранить URL**: `https://okurmen-api-xxxx.vercel.app`
 
-### 6.5 Проверить Health
+### Шаг 4: Test API
 ```bash
 curl https://okurmen-api-xxxx.vercel.app/api/health
 ```
 
-Должен вернуть:
+Expected:
 ```json
 {
   "status": "ok",
@@ -205,225 +155,344 @@ curl https://okurmen-api-xxxx.vercel.app/api/health
 
 ---
 
-## 🌐 Шаг 7: Деплой WEB (Main Website)
+## 🌐 2. Deploy Web (Frontend)
 
-### 7.1 Создать проект
-1. Vercel → New Project
-2. Same repository
-3. Project Name: `okurmen-web`
-4. Root Directory: `apps/web` ✅ ВАЖНО!
+### Шаг 1: Create New Project
+1. Vercel Dashboard → **Add New** → **Project**
+2. Import Git Repository: `zainabmambetkulovva/OKURMEN`
+3. Project Settings:
+   - **Project Name**: `okurmen-web`
+   - **Root Directory**: `apps/web` ✅
+   - **Framework Preset**: Next.js
+   - **Build Command**: оставить пустым (используется package.json)
+   - **Install Command**: `npm install`
 
-### 7.2 Environment Variables
+### Шаг 2: Environment Variables
+
 ```env
 # NextAuth
 NEXTAUTH_URL=https://okurmen-web-xxxx.vercel.app
-NEXTAUTH_SECRET=ваш-nextauth-secret-из-шага-5
+NEXTAUTH_SECRET=<тот-же-секрет-что-в-API>
+
+# Database
+DATABASE_URL=postgresql://user:pass@ep-xxx.neon.tech/okurmen?sslmode=require
+
+# API URL (из предыдущего шага!)
+NEXT_PUBLIC_API_URL=https://okurmen-api-xxxx.vercel.app
 
 # Google OAuth
 GOOGLE_CLIENT_ID=xxxxx.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=GOCSPX-xxxxx
 
-# Database
-DATABASE_URL=postgresql://user:pass@ep-xxx.neon.tech/okurmen?sslmode=require
-
-# API URL (из шага 6.4)
-NEXT_PUBLIC_API_URL=https://okurmen-api-xxxx.vercel.app
-
-# Node
+# Auto-set
 NODE_ENV=production
 ```
 
-### 7.3 Deploy
-1. Click **Deploy**
-2. Получить URL: `https://okurmen-web-xxxx.vercel.app`
+### Шаг 3: Deploy
+1. Нажать **Deploy**
+2. Подождать ~3-4 минуты
+3. **Сохранить URL**: `https://okurmen-web-xxxx.vercel.app`
 
-### 7.4 Проверить
-Откройте в браузере и проверьте:
-- ✅ Главная страница загружается
-- ✅ БИЛБАРС появляется (intro)
-- ✅ Все секции со scroll анимациями
-- ✅ Навигация работает
+### Шаг 4: Test Web
+1. Открыть в браузере
+2. Должна появиться анимация БИЛБАРСА
+3. Проверить scroll animations
 
 ---
 
-## 👨‍💼 Шаг 8: Деплой ADMIN Panel
+## 🔧 3. Update Configuration
 
-### 8.1 Создать проект
-- Project Name: `okurmen-admin`
-- Root Directory: `apps/admin`
+### A. Update Google OAuth Redirect URIs
+1. Google Console → Credentials
+2. Edit OAuth Client
+3. Add redirect URI:
+   ```
+   https://okurmen-web-xxxx.vercel.app/api/auth/callback/google
+   ```
+4. Save
 
-### 8.2 Environment Variables
+### B. Update API Environment Variables
+1. Vercel → `okurmen-api` → Settings → Environment Variables
+2. Update:
+   ```
+   WEB_URL=https://okurmen-web-xxxx.vercel.app
+   ```
+3. Redeploy: Deployments → ... → Redeploy
+
+---
+
+## 👨‍💼 4. Deploy Admin Panel
+
+### Project Settings:
+- **Project Name**: `okurmen-admin`
+- **Root Directory**: `apps/admin` ✅
+- **Framework**: Next.js
+
+### Environment Variables:
 ```env
 NEXTAUTH_URL=https://okurmen-admin-xxxx.vercel.app
-NEXTAUTH_SECRET=тот-же-секрет
-GOOGLE_CLIENT_ID=тот-же
-GOOGLE_CLIENT_SECRET=тот-же
-DATABASE_URL=тот-же
+NEXTAUTH_SECRET=<тот-же-секрет>
+DATABASE_URL=<та-же-база>
 NEXT_PUBLIC_API_URL=https://okurmen-api-xxxx.vercel.app
+GOOGLE_CLIENT_ID=<тот-же>
+GOOGLE_CLIENT_SECRET=<тот-же>
 NODE_ENV=production
 ```
 
-### 8.3 Deploy
+Deploy и сохранить URL.
 
 ---
 
-## 👔 Шаг 9: Деплой EMPLOYEE Panel
+## 👔 5. Deploy Employee Panel
 
-### 9.1 Создать проект
-- Project Name: `okurmen-employee`
-- Root Directory: `apps/employee`
+### Project Settings:
+- **Project Name**: `okurmen-employee`
+- **Root Directory**: `apps/employee` ✅
+- **Framework**: Next.js
 
-### 9.2 Environment Variables
+### Environment Variables:
 ```env
 NEXTAUTH_URL=https://okurmen-employee-xxxx.vercel.app
-NEXTAUTH_SECRET=тот-же-секрет
-DATABASE_URL=тот-же
+NEXTAUTH_SECRET=<тот-же-секрет>
+DATABASE_URL=<та-же-база>
 NEXT_PUBLIC_API_URL=https://okurmen-api-xxxx.vercel.app
+GOOGLE_CLIENT_ID=<тот-же>
+GOOGLE_CLIENT_SECRET=<тот-же>
 NODE_ENV=production
 ```
 
-### 9.3 Deploy
+Deploy и сохранить URL.
 
 ---
 
-## 🎓 Шаг 10: Деплой STUDENT Panel
+## 🎓 6. Deploy Student Panel
 
-### 10.1 Создать проект
-- Project Name: `okurmen-student`
-- Root Directory: `apps/student`
+### Project Settings:
+- **Project Name**: `okurmen-student`
+- **Root Directory**: `apps/student` ✅
+- **Framework**: Next.js
 
-### 10.2 Environment Variables
-Те же что в employee
-
-### 10.3 Deploy
-
----
-
-## 🔄 Шаг 11: Обновить URL во всех проектах
-
-### 11.1 API - обновить Frontend URLs
+### Environment Variables:
 ```env
-WEB_URL=https://okurmen-web-xxxx.vercel.app
-ADMIN_URL=https://okurmen-admin-xxxx.vercel.app
-EMPLOYEE_URL=https://okurmen-employee-xxxx.vercel.app
+NEXTAUTH_URL=https://okurmen-student-xxxx.vercel.app
+NEXTAUTH_SECRET=<тот-же-секрет>
+DATABASE_URL=<та-же-база>
+NEXT_PUBLIC_API_URL=https://okurmen-api-xxxx.vercel.app
+GOOGLE_CLIENT_ID=<тот-же>
+GOOGLE_CLIENT_SECRET=<тот-же>
+NODE_ENV=production
 ```
-Redeploy API!
 
-### 11.2 Google OAuth - добавить все redirect URIs
-```
-https://okurmen-web-xxxx.vercel.app/api/auth/callback/google
-https://okurmen-admin-xxxx.vercel.app/api/auth/callback/google
-https://okurmen-employee-xxxx.vercel.app/api/auth/callback/google
-```
+Deploy и сохранить URL.
 
 ---
 
-## 🌍 Шаг 12: Custom Domains (Опционально)
+## ✅ 7. Post-Deployment Verification
 
-### 12.1 Добавить домен в Vercel
-1. Project Settings → Domains
-2. Add Domain: `okurmen.kz`
-3. Следовать инструкциям DNS
+### A. API Health Check
+```bash
+curl https://okurmen-api-xxxx.vercel.app/api/health
+```
 
-### 12.2 Настроить поддомены
-- `api.okurmen.kz` → okurmen-api
-- `admin.okurmen.kz` → okurmen-admin
-- `employee.okurmen.kz` → okurmen-employee
-- `student.okurmen.kz` → okurmen-student
+### B. Web App Tests
+- [ ] Homepage loads (`/`)
+- [ ] БИЛБАРС intro animation plays
+- [ ] Scroll animations work
+- [ ] Images load correctly
+- [ ] Navigation works
+- [ ] Mobile responsive
 
-### 12.3 Обновить Environment Variables
-Заменить все `.vercel.app` на ваши домены!
+### C. Authentication Tests
+- [ ] Google OAuth works
+- [ ] Login redirects correctly
+- [ ] Session persists
 
----
-
-## ✅ Финальная Проверка
-
-### Web App
-- [ ] Главная страница загружается
-- [ ] БИЛБАРС intro работает
-- [ ] Все секции видны
-- [ ] Scroll анимации работают
-- [ ] Изображения загружаются
-- [ ] Responsive работает на mobile
-
-### API
-- [ ] Health check возвращает OK
-- [ ] Rate limiting работает
-- [ ] Database подключена
-- [ ] Redis работает
-
-### Auth
-- [ ] Google OAuth работает
-- [ ] Login/Logout работает
-- [ ] 2FA email приходит
-
-### Admin Panel
-- [ ] Загружается
-- [ ] Авторизация работает
-- [ ] CRUD операции работают
+### D. Database Connection
+- [ ] Prisma connects
+- [ ] Queries work
+- [ ] No connection errors in logs
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Build Failed
-```bash
-# Проверить локально
-cd apps/web
-npm run build
+### Build Failed: "No such file or directory"
 
-# Если ошибка - исправить и push
-```
+**Problem**: Vercel не находит файлы в monorepo.
 
-### Environment Variables не работают
-- Проверить что добавлены в Vercel
-- Проверить названия (case-sensitive)
-- Redeploy после добавления
+**Solution**: 
+1. Убедитесь что **Root Directory** установлена правильно (`apps/web`, `apps/api` и т.д.)
+2. Проверьте что `vercel.json` файл существует в каждой app
+
+### Environment Variables Not Working
+
+**Problem**: Переменные не применяются.
+
+**Solution**:
+1. Settings → Environment Variables
+2. Проверить spelling (case-sensitive!)
+3. Убедиться что выбраны правильные environments: Production ✅, Preview ✅
+4. Redeploy после добавления
 
 ### Database Connection Error
-- Проверить DATABASE_URL
-- Проверить `?sslmode=require`
-- Проверить что миграции применены
 
-### Rate Limiting не работает
-- Проверить Upstash credentials
-- Проверить ENABLE_RATE_LIMIT=true
+**Problem**: `Error: P1001: Can't reach database server`
 
-### OAuth Error
-- Проверить redirect URIs в Google Console
-- Проверить Client ID и Secret
-- Проверить NEXTAUTH_URL
+**Solution**:
+1. Проверить `DATABASE_URL` формат
+2. Убедиться что `?sslmode=require` добавлен
+3. Проверить что Neon database running
+4. Проверить IP whitelist (Neon по умолчанию открыт)
+
+### Redis Connection Error
+
+**Problem**: Rate limiting не работает.
+
+**Solution**:
+1. Проверить `UPSTASH_REDIS_REST_URL` и `TOKEN`
+2. Убедиться что `ENABLE_RATE_LIMIT=true`
+3. Проверить Upstash dashboard (database active?)
+
+### Images Not Loading (404)
+
+**Problem**: БИЛБАРС изображения не грузятся.
+
+**Solution**:
+1. Проверить что файлы в `apps/web/public/bilbars/` (25 files)
+2. Проверить Next.js Image config в `next.config.ts`
+3. Check browser console для 404 errors
+4. Verify paths: `/bilbars/БИЛБАРС xxx.png`
+
+### Google OAuth Error
+
+**Problem**: "redirect_uri_mismatch"
+
+**Solution**:
+1. Google Console → Credentials → OAuth Client
+2. Add redirect URI: `https://your-domain.vercel.app/api/auth/callback/google`
+3. Wait 5 minutes for propagation
+4. Try again
 
 ---
 
-## 📊 Monitoring
+## 📊 Performance Monitoring
 
-### Vercel Dashboard
-- Analytics: Traffic, Performance
-- Logs: Real-time logs
-- Deployments: History
+### После деплоя, проверить:
 
-### Проверить Performance
-- Lighthouse в Chrome DevTools
-- Web Vitals в Vercel Analytics
+1. **Vercel Analytics**
+   - Dashboard → Analytics
+   - Check Web Vitals
 
----
+2. **Lighthouse**
+   - Chrome DevTools → Lighthouse
+   - Target: Score >90
 
-## 🎉 Готово!
-
-Ваш проект OKURMEN успешно задеплоен на Vercel!
-
-### URLs:
-- 🌐 Web: https://okurmen-web-xxxx.vercel.app
-- 🔧 API: https://okurmen-api-xxxx.vercel.app
-- 👨‍💼 Admin: https://okurmen-admin-xxxx.vercel.app
-- 👔 Employee: https://okurmen-employee-xxxx.vercel.app
-- 🎓 Student: https://okurmen-student-xxxx.vercel.app
+3. **PageSpeed Insights**
+   - https://pagespeed.web.dev
+   - Test mobile + desktop
 
 ---
 
-**Время деплоя**: ~30-60 минут
-**Сложность**: Средняя
-**Стоимость**: Free (Hobby Plan) + Neon Free Tier
+## 🔄 Update Deployment
 
-**Удачи! 🚀**
+### Когда вносите изменения в код:
+
+```bash
+# 1. Commit changes
+git add .
+git commit -m "feat: новая фича"
+
+# 2. Push
+git push origin main
+
+# 3. Vercel auto-deploys!
+```
+
+Vercel автоматически создаст новый deploy при push в main.
+
+---
+
+## 💰 Cost Estimation
+
+### Vercel Hobby Plan (Free):
+- 100 GB bandwidth
+- 100 builds/month
+- Unlimited projects
+- **Cost: $0/month** ✅
+
+### External Services (Free tiers):
+- Neon: 0.5 GB storage (free)
+- Upstash: 10k requests/day (free)
+- Google OAuth: Free
+- Gmail: Free
+
+**Total: $0/month** 🎉
+
+---
+
+## 🎉 Success Criteria
+
+### ✅ Deploy successful if:
+1. All 5 apps deployed without errors
+2. Health check returns OK
+3. Web app loads and БИЛБАРС animates
+4. Authentication works (Google OAuth)
+5. Database connected
+6. Rate limiting active
+7. No critical errors in Vercel logs
+8. Performance metrics acceptable (Lighthouse >90)
+
+---
+
+## 📞 Support Resources
+
+### Documentation:
+- [DEPLOYMENT-READY.md](./DEPLOYMENT-READY.md)
+- [ENV-SETUP-GUIDE.md](./ENV-SETUP-GUIDE.md)
+- [FINAL-DEPLOYMENT-CHECKLIST.md](./FINAL-DEPLOYMENT-CHECKLIST.md)
+
+### External:
+- Vercel Docs: https://vercel.com/docs
+- Neon Docs: https://neon.tech/docs
+- Upstash Docs: https://docs.upstash.com
+- Next.js Docs: https://nextjs.org/docs
+- Turborepo Docs: https://turbo.build/repo/docs
+
+---
+
+## 🚀 Quick Reference
+
+### Deployment Order:
+1. API first
+2. Web second
+3. Admin/Employee/Student
+
+### Required for ALL apps:
+```env
+DATABASE_URL=postgresql://...
+NODE_ENV=production
+```
+
+### Required for API only:
+```env
+JWT_SECRET=xxx
+UPSTASH_REDIS_REST_URL=xxx
+EMAIL_USER=xxx
+WEB_URL=xxx
+```
+
+### Required for Frontend apps:
+```env
+NEXTAUTH_URL=https://...
+NEXTAUTH_SECRET=xxx
+NEXT_PUBLIC_API_URL=https://...
+GOOGLE_CLIENT_ID=xxx
+```
+
+---
+
+**Готово! Следуйте шагам выше для успешного деплоя! 🚀**
+
+**Время: ~1 час**  
+**Сложность: Средняя**  
+**Стоимость: Free**
