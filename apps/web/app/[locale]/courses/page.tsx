@@ -4,8 +4,9 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Clock, BookOpen, Users, TrendingUp, Award, Calendar, Star, GraduationCap, Code, Palette, Globe, Brain, Zap } from 'lucide-react';
+import { Clock, BookOpen, Users, TrendingUp, Award, Calendar, Star, GraduationCap, Code, Palette, Globe, Brain, Zap, ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -48,6 +49,7 @@ const courseIcons: Record<string, any> = {
 export default function CoursesPage() {
   const t = useTranslations('courses');
   const locale = useLocale();
+  const router = useRouter();
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'ALL' | 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED'>('ALL');
@@ -88,6 +90,17 @@ export default function CoursesPage() {
         </div>
         
         <Container>
+          {/* Back Button */}
+          <button
+            onClick={() => router.back()}
+            className="relative z-10 mb-8 flex items-center gap-2 text-white/90 hover:text-white transition-colors group"
+          >
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <span className="font-medium">
+              {locale === 'ru' ? 'Назад' : locale === 'ky' ? 'Артка' : 'Back'}
+            </span>
+          </button>
+
           <div className="relative z-10 text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               {locale === 'ru' ? 'Наши Курсы' : locale === 'ky' ? 'Биздин Курстар' : 'Our Courses'}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { BilbarsSectionAnimated } from '@/components/Bilbars';
+import Image from 'next/image';
 
 export default function HeroSection() {
   const t = useTranslations('hero');
@@ -92,7 +92,7 @@ export default function HeroSection() {
           <div className="lg:col-span-5 relative">
             {/* Main Visual Container */}
             <div className="relative">
-              {/* Large Blue Shape with БИЛБАРС */}
+              {/* Large Blue Shape */}
               <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-primary-500 to-primary-700 p-8 shadow-soft-lg relative overflow-hidden">
                 <div className="h-full flex flex-col justify-between">
                   {/* Top Content */}
@@ -105,16 +105,15 @@ export default function HeroSection() {
                     </div>
                   </div>
 
-                  {/* Center - БИЛБАРС */}
-                  <div className="text-center relative z-10">
-                    <BilbarsSectionAnimated
-                      state="wave"
-                      size="xl"
-                      position="center"
-                      animationType="scale"
-                      threshold={0.2}
-                      delay={300}
-                      className="mx-auto"
+                  {/* Center Content */}
+                  <div className="text-center relative z-10 flex items-center justify-center">
+                    <Image
+                      src="/bilbars-hero.png"
+                      alt="БИЛБАРС"
+                      width={350}
+                      height={350}
+                      className="object-contain"
+                      priority
                     />
                   </div>
 
