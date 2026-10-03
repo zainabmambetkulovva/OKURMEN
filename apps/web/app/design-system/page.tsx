@@ -157,8 +157,7 @@ export default function DesignSystemPage() {
                 Variants
               </h3>
               <div className="flex flex-wrap gap-4">
-                <Button variant="primary">Primary (Orange)</Button>
-                <Button variant="secondary">Secondary (Blue)</Button>
+                <Button variant="primary">Primary</Button>
                 <Button variant="outline">Outline</Button>
                 <Button variant="ghost">Ghost</Button>
               </div>
