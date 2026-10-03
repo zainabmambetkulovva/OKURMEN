@@ -208,6 +208,10 @@ export default function BilbarsCharacter({
             alt="Билбарс"
             fill
             className="object-contain drop-shadow-2xl"
+            style={{ 
+              mixBlendMode: 'multiply',
+              filter: 'contrast(1.1) brightness(1.05)'
+            }}
             priority
             quality={100}
           />
