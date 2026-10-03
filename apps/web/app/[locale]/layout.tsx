@@ -3,10 +3,26 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import type { Metadata } from 'next';
+import { Montserrat, Open_Sans } from 'next/font/google';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import SessionProvider from '@/components/SessionProvider';
 import ScrollToTop from '@/components/ScrollToTop';
 import AIAssistant from '@/components/AIAssistant';
+import '../globals.css';
+
+const montserrat = Montserrat({
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  weight: ['600', '700', '800', '900'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
+
+const openSans = Open_Sans({
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-open-sans',
+  display: 'swap',
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -98,21 +114,25 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <SessionProvider>
-      <ThemeProvider>
-        <NextIntlClientProvider messages={messages}>
-          <div className="stars-background hidden dark:block">
-            <div id="stars"></div>
-            <div id="stars2"></div>
-            <div id="stars3"></div>
-          </div>
+    <html lang={locale} className={`${montserrat.variable} ${openSans.variable}`}>
+      <body className="antialiased font-sans">
+        <SessionProvider>
+          <ThemeProvider>
+            <NextIntlClientProvider messages={messages}>
+              <div className="stars-background hidden dark:block">
+                <div id="stars"></div>
+                <div id="stars2"></div>
+                <div id="stars3"></div>
+              </div>
 
-          {children}
+              {children}
 
-          <ScrollToTop />
-          <AIAssistant />
-        </NextIntlClientProvider>
-      </ThemeProvider>
-    </SessionProvider>
+              <ScrollToTop />
+              <AIAssistant />
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }
