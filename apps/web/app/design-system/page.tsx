@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/Button';
 
+// Design System - Updated for production deployment
 export default function DesignSystemPage() {
   return (
     <div className="min-h-screen bg-white">
