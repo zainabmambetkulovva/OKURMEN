@@ -16,11 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
+
 
 ::-webkit-scrollbar {
   width: 8px;
