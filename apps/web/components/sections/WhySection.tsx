@@ -1,18 +1,18 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.Z2yQmKNVD7/ours
 import { RefreshCw, Users, Smartphone, Target, DollarSign, BookOpen } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 =======
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.Z2yQmKNVD7/theirs
 
 export default function WhySection() {
   const t = useTranslations('why');
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.Z2yQmKNVD7/ours
   const features = [
     { 
       icon: RefreshCw, 
@@ -70,7 +70,7 @@ export default function WhySection() {
     { id: 'methodology', number: '04' },
     { id: 'grant', number: '05' },
     { id: 'activities', number: '06' },
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.Z2yQmKNVD7/theirs
   ];
 
   useEffect(() => {
@@ -100,7 +100,7 @@ export default function WhySection() {
   }, []);
 
   return (
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.Z2yQmKNVD7/ours
     <section 
       id="about" 
       ref={sectionRef}
@@ -181,7 +181,6 @@ export default function WhySection() {
               </div>
             );
           })}
-        </div>
 =======
     <section className="relative bg-gradient-to-b from-white to-gray-50 py-20 sm:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -308,8 +307,8 @@ export default function WhySection() {
               </a>
             </div>
           </div>
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.Z2yQmKNVD7/theirs
         </div>
->>>>>>> feature/landing
       </div>
     </section>
   );

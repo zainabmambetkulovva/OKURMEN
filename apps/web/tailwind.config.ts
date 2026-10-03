@@ -13,7 +13,7 @@ const config: Config = {
         // Unified premium color system based on logo
         background: "var(--background)",
         foreground: "var(--foreground)",
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.pX4QgAtF9q/ours
         brand: {
           50: '#fff7ed',
           100: '#ffedd5',
@@ -86,7 +86,7 @@ const config: Config = {
           700: '#334E68', // Dark blue for text
           800: '#243B53',
           900: '#102A43',
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.pX4QgAtF9q/theirs
         },
         // Premium neutrals
         slate: {
@@ -103,7 +103,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.pX4QgAtF9q/ours
         sans: ['var(--font-open-sans)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Open Sans', 'system-ui', 'sans-serif'],
         display: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'JetBrains Mono', 'Fira Code', 'monospace'],
@@ -144,7 +144,7 @@ const config: Config = {
         'soft': '0 2px 15px rgba(26, 128, 255, 0.08)',
         'soft-lg': '0 10px 40px rgba(26, 128, 255, 0.12)',
         'orange': '0 4px 20px rgba(255, 145, 0, 0.15)',
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.pX4QgAtF9q/theirs
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',

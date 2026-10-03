@@ -8,24 +8,6 @@ import SessionProvider from '@/components/SessionProvider';
 import ScrollToTop from '@/components/ScrollToTop';
 import AIAssistant from '@/components/AIAssistant';
 import BilbarsIntroWrapper from '@/components/Bilbars/BilbarsIntroWrapper';
-import { Montserrat, Open_Sans } from 'next/font/google';
-import '@/app/globals.css';
-
-// Основной шрифт для заголовков и акцентов
-const montserrat = Montserrat({
-  subsets: ['latin', 'latin-ext', 'cyrillic'],
-  weight: ['600', '700', '800', '900'],
-  variable: '--font-montserrat',
-  display: 'swap',
-});
-
-// Второстепенный шрифт для текста
-const openSans = Open_Sans({
-  subsets: ['latin', 'latin-ext', 'cyrillic'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-open-sans',
-  display: 'swap',
-});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -37,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'hero' });
+  await getTranslations({ locale, namespace: 'hero' });
 
   const titles: Record<string, string> = {
     ky: 'ОКУРМЕН IT — Заманбап IT билим берүү',
@@ -79,7 +61,7 @@ export async function generateMetadata({
       description: descriptions[locale] || descriptions.ru,
       url: 'https://okurmen.kg',
       siteName: 'ОКУРМЕН IT',
-      locale: locale,
+      locale,
       type: 'website',
     },
     twitter: {
@@ -117,29 +99,23 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${montserrat.variable} ${openSans.variable}`}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className="antialiased font-sans">
-        <SessionProvider>
-          <ThemeProvider>
-            <NextIntlClientProvider messages={messages}>
-              <BilbarsIntroWrapper />
-              {/* Stars Background (visible only in dark theme) */}
-              <div className="stars-background hidden dark:block">
-                <div id="stars"></div>
-                <div id="stars2"></div>
-                <div id="stars3"></div>
-              </div>
-              {children}
-              <ScrollToTop />
-              <AIAssistant />
-            </NextIntlClientProvider>
-          </ThemeProvider>
-        </SessionProvider>
-      </body>
-    </html>
+    <SessionProvider>
+      <ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <BilbarsIntroWrapper />
+
+          <div className="stars-background hidden dark:block">
+            <div id="stars"></div>
+            <div id="stars2"></div>
+            <div id="stars3"></div>
+          </div>
+
+          {children}
+
+          <ScrollToTop />
+          <AIAssistant />
+        </NextIntlClientProvider>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }

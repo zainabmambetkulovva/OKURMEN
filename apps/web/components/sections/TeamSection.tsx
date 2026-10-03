@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.ZjigHVunf5/ours
 import { User, ChevronLeft, ChevronRight, Mail } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useLocale } from 'next-intl';
@@ -20,7 +20,7 @@ interface Employee {
   };
 }
 =======
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.ZjigHVunf5/theirs
 
 export default function TeamSection() {
   const t = useTranslations('team');
@@ -34,7 +34,7 @@ export default function TeamSection() {
   const [itemsPerView, setItemsPerView] = useState(1);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.ZjigHVunf5/ours
   const gradients = [
     'from-blue-500 to-cyan-500',
     'from-green-500 to-emerald-500',
@@ -156,11 +156,26 @@ export default function TeamSection() {
               <div key={i} className="bg-slate-100 dark:bg-slate-800 rounded-2xl h-80 animate-pulse" />
             ))}
           </div>
+=======
+  return (
+    <section id="team" className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-bold text-dark-900 mb-4">
+            {t('title')}
+          </h2>
+          <p className="text-xl text-dark-600 max-w-2xl mx-auto mb-6">
+            {t('description')}
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto rounded-full"></div>
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.ZjigHVunf5/theirs
         </div>
       </section>
     );
   }
 
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.ZjigHVunf5/ours
   if (employees.length === 0 && founders.length === 0) {
     return (
       <section id="team" className="py-20 bg-white dark:bg-slate-900">
@@ -321,22 +336,7 @@ export default function TeamSection() {
               ))}
             </div>
           )}
-        </div>
 =======
-  return (
-    <section id="team" className="py-24 bg-gradient-to-br from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-dark-900 mb-4">
-            {t('title')}
-          </h2>
-          <p className="text-xl text-dark-600 max-w-2xl mx-auto mb-6">
-            {t('description')}
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto rounded-full"></div>
-        </div>
-
         {/* Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {/* Founders Card */}
@@ -406,8 +406,8 @@ export default function TeamSection() {
           <p className="text-sm text-dark-600">
             {t('info_details')}
           </p>
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.ZjigHVunf5/theirs
         </div>
->>>>>>> feature/landing
       </div>
     </section>
   );

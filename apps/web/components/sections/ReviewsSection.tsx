@@ -1,6 +1,6 @@
 'use client';
 
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.TTzCyaOFcH/ours
 import { Star, User, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useLocale } from 'next-intl';
@@ -25,7 +25,7 @@ interface Review {
 }
 =======
 import { useTranslations } from 'next-intl';
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.TTzCyaOFcH/theirs
 
 export default function ReviewsSection() {
   const locale = useLocale();
@@ -175,7 +175,7 @@ export default function ReviewsSection() {
   }
 
   return (
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.TTzCyaOFcH/ours
     <section id="reviews" className="py-20 bg-slate-50 dark:bg-slate-800/50 relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -338,6 +338,7 @@ export default function ReviewsSection() {
               ))}
             </div>
           )}
+        </div>
 =======
     <section id="reviews" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -401,8 +402,8 @@ export default function ReviewsSection() {
               👨‍👩‍👧‍👦 {t('parents')}
             </span>
           </div>
->>>>>>> feature/landing
         </div>
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.TTzCyaOFcH/theirs
       </div>
     </section>
   );

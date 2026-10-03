@@ -20,7 +20,7 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
 
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/ours
   const navItems = [
     { key: 'courses', href: '#courses' },
     { key: 'about', href: '#about' },
@@ -52,7 +52,7 @@ export default function Header() {
   const languages = [
     { code: 'ky', label: 'ҚР' },
     { code: 'ru', label: 'РУ' },
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/theirs
     { code: 'en', label: 'EN' },
   ];
 
@@ -62,17 +62,25 @@ export default function Header() {
 
   const scrollToSection = (href: string) => {
     if (href === '#') {
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/ours
       window.scrollTo({ top: 0 });
     } else {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView();
+=======
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/theirs
       }
     }
     setIsMobileMenuOpen(false);
   };
 
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/ours
   const openAuthModal = (mode: 'login' | 'register') => {
     setAuthMode(mode);
     setIsAuthModalOpen(true);
@@ -107,16 +115,6 @@ export default function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
 =======
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-    setIsMobileMenuOpen(false);
-  };
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
@@ -213,16 +211,16 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-gray-100 py-4">
             <nav className="flex flex-col space-y-1">
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/theirs
               {navItems.map((item) => (
                 <button
                   key={item.key}
                   onClick={() => scrollToSection(item.href)}
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/ours
                   className="text-sm font-medium text-white/90 hover:text-white transition-colors duration-200"
 =======
                   className="text-left px-3 py-2.5 text-sm font-medium text-dark-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/theirs
                 >
                   {t(item.key as any)}
                 </button>
@@ -235,7 +233,7 @@ export default function Header() {
               </button>
             </nav>
 
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/ours
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center space-x-3">
               {/* Theme Toggle */}
@@ -273,7 +271,7 @@ export default function Header() {
                       locale === lang.code
                         ? 'bg-primary-600 text-white'
                         : 'bg-gray-100 text-dark-600'
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/theirs
                     }`}
                   >
                     {lang.label}
@@ -281,7 +279,7 @@ export default function Header() {
                 ))}
               </div>
 
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/ours
               {/* Auth Buttons or User Menu */}
               {session?.user ? (
                 <div className="flex items-center gap-3">
@@ -430,7 +428,7 @@ export default function Header() {
               >
                 {t('contacts')}
               </button>
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.J2toKtxe65/theirs
             </div>
           )}
         </div>

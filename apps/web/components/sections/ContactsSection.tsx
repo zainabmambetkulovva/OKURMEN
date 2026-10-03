@@ -1,11 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.Jze9FF1e3y/ours
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 =======
 import { Button } from '@/components/ui/Button';
->>>>>>> feature/landing
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.Jze9FF1e3y/theirs
 
 export default function ContactsSection() {
   const t = useTranslations('contacts');
@@ -47,7 +47,7 @@ export default function ContactsSection() {
   ];
 
   return (
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.Jze9FF1e3y/ours
     <section id="contacts" className="py-20 bg-white dark:bg-slate-900 relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -59,6 +59,21 @@ export default function ContactsSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
           <h2 className="font-display text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white mb-4">
+=======
+    <section id="contacts" className="py-24 bg-gradient-to-br from-primary-600 to-primary-700 text-white relative overflow-hidden">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute w-96 h-96 bg-white rounded-full -top-48 -left-48 blur-3xl"></div>
+          <div className="absolute w-96 h-96 bg-accent-500 rounded-full -bottom-48 -right-48 blur-3xl"></div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.Jze9FF1e3y/theirs
             {t('title')}
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-blue-600 mx-auto rounded-full mb-6"></div>
@@ -67,6 +82,7 @@ export default function ContactsSection() {
           </p>
         </div>
 
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.Jze9FF1e3y/ours
         <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {/* Contact Cards */}
           <div className="lg:col-span-2 grid md:grid-cols-3 gap-6">
@@ -207,25 +223,10 @@ export default function ContactsSection() {
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
               </a>
+            </div>
+          </div>
+        </div>
 =======
-    <section id="contacts" className="py-24 bg-gradient-to-br from-primary-600 to-primary-700 text-white relative overflow-hidden">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute w-96 h-96 bg-white rounded-full -top-48 -left-48 blur-3xl"></div>
-          <div className="absolute w-96 h-96 bg-accent-500 rounded-full -bottom-48 -right-48 blur-3xl"></div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            {t('title')}
-          </h2>
-          <div className="w-24 h-1 bg-white/50 mx-auto rounded-full"></div>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left: Contact Info */}
           <div className="space-y-6">
@@ -326,10 +327,10 @@ export default function ContactsSection() {
               <p className="text-xs text-dark-500 mt-4 text-center">
                 Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
               </p>
->>>>>>> feature/landing
             </div>
           </div>
         </div>
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.Jze9FF1e3y/theirs
       </div>
     </section>
   );

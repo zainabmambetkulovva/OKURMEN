@@ -1,6 +1,6 @@
 'use client';
 
-<<<<<<< HEAD
+<<<<<<< C:/Users/Dell/AppData/Local/Temp/tmp.jtcaLtmdHz/ours
 import { useState, useEffect } from 'react';
 import { BookOpen, Clock, Users, ArrowRight, TrendingUp } from 'lucide-react';
 import { useRouter } from '@/i18n/routing';
@@ -27,9 +27,6 @@ interface Course {
     lessons: number;
   };
 }
-=======
-import { useTranslations } from 'next-intl';
->>>>>>> feature/landing
 
 export default function CoursesSection() {
   const router = useRouter();
@@ -37,7 +34,6 @@ export default function CoursesSection() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
 
-<<<<<<< HEAD
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -290,8 +286,12 @@ export default function CoursesSection() {
             Смотреть все курсы
             <ArrowRight className="w-5 h-5" />
           </button>
-        </div>
 =======
+import { useTranslations } from 'next-intl';
+
+export default function CoursesSection() {
+  const t = useTranslations('courses');
+
   const courses = [
     {
       id: 'frontend',
@@ -454,8 +454,8 @@ export default function CoursesSection() {
               </div>
             </div>
           </div>
+>>>>>>> C:/Users/Dell/AppData/Local/Temp/tmp.jtcaLtmdHz/theirs
         </div>
->>>>>>> feature/landing
       </div>
     </section>
   );
