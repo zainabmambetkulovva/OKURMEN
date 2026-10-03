@@ -7,7 +7,6 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 import SessionProvider from '@/components/SessionProvider';
 import ScrollToTop from '@/components/ScrollToTop';
 import AIAssistant from '@/components/AIAssistant';
-import BilbarsIntroWrapper from '@/components/Bilbars/BilbarsIntroWrapper';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -102,8 +101,6 @@ export default async function LocaleLayout({
     <SessionProvider>
       <ThemeProvider>
         <NextIntlClientProvider messages={messages}>
-          <BilbarsIntroWrapper />
-
           <div className="stars-background hidden dark:block">
             <div id="stars"></div>
             <div id="stars2"></div>
