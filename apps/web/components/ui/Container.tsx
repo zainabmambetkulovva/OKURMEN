@@ -1,19 +1,23 @@
 ﻿import React from 'react';
-import './styles.css';
 
 export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'full';
 }
 
+const sizeClasses = {
+  sm: 'max-w-3xl',
+  md: 'max-w-5xl',
+  lg: 'max-w-7xl',
+  full: 'max-w-full',
+};
+
 export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ children, size = 'lg', className = '', ...props }, ref) => {
-    const sizeClass = size !== 'lg' ? `ui-container-${size}` : '';
-
     return (
       <div
         ref={ref}
-        className={`ui-container ${sizeClass} ${className}`}
+        className={`${sizeClasses[size]} mx-auto px-4 sm:px-6 lg:px-8 ${className}`}
         {...props}
       >
         {children}
@@ -23,4 +27,3 @@ export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
 );
 
 Container.displayName = 'Container';
-
