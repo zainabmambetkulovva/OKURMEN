@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { AlertTriangle } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Error({
   error,
@@ -10,6 +11,8 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const { t } = useLanguage();
+  
   useEffect(() => {
     console.error('App error:', error);
   }, [error]);
@@ -25,16 +28,16 @@ export default function Error({
               </div>
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Ошибка загрузки
+              {t('error.loadingError')}
             </h2>
             <p className="text-gray-600 mb-6">
-              Пожалуйста, перезагрузите страницу
+              {t('error.pleaseReload')}
             </p>
             <button
               onClick={() => reset()}
               className="w-full bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-medium transition-colors"
             >
-              Перезагрузить
+              {t('common.reload')}
             </button>
           </div>
         </div>

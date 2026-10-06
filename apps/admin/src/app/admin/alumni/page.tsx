@@ -279,6 +279,7 @@ function AlumniModal({
     projects: alumni?.projects || [],
   });
   const [loading, setLoading] = useState(false);
+  const [saveError, setSaveError] = useState('');
   const [newProject, setNewProject] = useState({ title: '', url: '' });
 
   const handleAddProject = () => {
@@ -300,6 +301,7 @@ function AlumniModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSaveError('');
     setLoading(true);
 
     try {
@@ -307,7 +309,9 @@ function AlumniModal({
       const url = alumni
         ? `${apiUrl}/api/alumni/${alumni.id}`
         : `${apiUrl}/api/alumni`;
-      
+
+      const token = typeof window !== 'undefined' ? localStorage.getItem('auth-token') : null;
+
       const payload = {
         name: formData.name,
         position: formData.position || undefined,
@@ -317,11 +321,12 @@ function AlumniModal({
         projects: formData.projects,
         isFeatured: true,
       };
-      
+
       const response = await fetch(url, {
         method: alumni ? 'PATCH' : 'POST',
         headers: {
           'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         credentials: 'include',
         body: JSON.stringify(payload),
@@ -330,13 +335,29 @@ function AlumniModal({
       if (response.ok) {
         onSuccess();
         onClose();
+      } else {
+        // Parse and show real error from API
+        let errorMsg = `Ошибка сервера: ${response.status}`;
+        try {
+          const errorData = await response.json();
+          if (errorData?.error) errorMsg = errorData.error;
+          else if (errorData?.message) errorMsg = errorData.message;
+        } catch {
+          // JSON parse failed — keep HTTP status message
+        }
+        setSaveError(errorMsg);
       }
     } catch (error) {
       console.error('Failed to save alumni:', error);
+      setSaveError('Не удалось подключиться к серверу. Проверьте соединение.');
     } finally {
       setLoading(false);
     }
   };
+
+  // A project is required only when creating a new alumni.
+  // When editing, existing alumni may have no projects — allow saving without them.
+  const isSubmitDisabled = loading || !formData.name.trim() || (!alumni && formData.projects.length === 0);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
@@ -404,9 +425,9 @@ function AlumniModal({
           {/* Projects Section */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Проекты <span className="text-red-500">*</span> (минимум 1)
+              Проекты{!alumni && <span className="text-red-500"> * (минимум 1)</span>}
             </label>
-            
+
             {/* Current Projects */}
             {formData.projects.length > 0 && (
               <div className="space-y-2 mb-4">
@@ -476,10 +497,17 @@ function AlumniModal({
             />
           </div>
 
+          {/* Error message */}
+          {saveError && (
+            <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-sm text-red-600 dark:text-red-400">
+              {saveError}
+            </div>
+          )}
+
           <div className="flex items-center space-x-4 pt-4">
             <button
               type="submit"
-              disabled={loading || !formData.name || formData.projects.length === 0}
+              disabled={isSubmitDisabled}
               className="flex-1 px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Сохранение...' : 'Сохранить'}
@@ -487,7 +515,8 @@ function AlumniModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
+              disabled={loading}
+              className="flex-1 px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-all disabled:opacity-50"
             >
               Отмена
             </button>

@@ -65,12 +65,25 @@ export default function AlumniSection() {
     const fetchAlumni = async () => {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+        console.log('[AlumniSection] Fetching from:', `${apiUrl}/api/alumni?featured=true`);
         const res = await fetch(`${apiUrl}/api/alumni?featured=true`);
-        if (!res.ok) throw new Error('failed');
+        console.log('[AlumniSection] Response status:', res.status);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-        if (data.success && data.data) setAlumni(data.data);
-      } catch { setAlumni([]); }
-      finally { setLoading(false); }
+        console.log('[AlumniSection] Response data:', { success: data.success, count: data.data?.length });
+        if (data.success && data.data) {
+          console.log('[AlumniSection] Setting alumni:', data.data.length, 'items');
+          setAlumni(data.data);
+        } else {
+          console.warn('[AlumniSection] Invalid response structure:', data);
+          setAlumni([]);
+        }
+      } catch (error) {
+        console.error('[AlumniSection] Fetch error:', error);
+        setAlumni([]);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchAlumni();
   }, []);
