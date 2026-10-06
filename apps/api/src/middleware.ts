@@ -21,7 +21,7 @@ export function middleware(request: NextRequest) {
       ? process.env.ALLOWED_ORIGINS.split(',')
       : [
           'https://okurmen-admin.vercel.app',
-          'https://okurmen-web.vercel.app',
+          'https://okurmen-seven.vercel.app',
           'https://okurmen-student.vercel.app',
           'https://okurmen-employee.vercel.app',
         ];
