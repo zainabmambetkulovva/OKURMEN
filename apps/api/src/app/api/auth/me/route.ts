@@ -36,12 +36,22 @@ export async function GET(request: NextRequest) {
 
     // Verify JWT
     console.log('Verifying JWT...');
-    const { payload } = await jwtVerify(token, JWT_SECRET);
-
-    console.log('JWT payload:', payload);
+    let payload;
+    try {
+      const verified = await jwtVerify(token, JWT_SECRET);
+      payload = verified.payload;
+      console.log('JWT verified successfully');
+      console.log('JWT payload:', payload);
+    } catch (jwtError) {
+      console.error('JWT verification failed:', jwtError);
+      return NextResponse.json(
+        { success: false, error: 'Invalid or expired token' },
+        { status: 401 }
+      );
+    }
 
     // Проверяем userId (может быть в разных полях)
-    const userId = (payload.user_id || payload.id || payload.userId) as string;
+    const userId = (payload.userId || payload.user_id || payload.id) as string;
 
     if (!userId) {
       console.log('No userId in token');
