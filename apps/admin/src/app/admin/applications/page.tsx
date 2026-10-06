@@ -32,7 +32,8 @@ export default function ApplicationsPage() {
 
   const fetchApplications = async () => {
     try {
-      const response = await fetch('http://localhost:3002/api/applications', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/applications`, {
         credentials: 'include',
       });
       const data = await response.json();
@@ -46,7 +47,8 @@ export default function ApplicationsPage() {
 
   const updateStatus = async (id: string, status: string) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/applications/${id}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/applications/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

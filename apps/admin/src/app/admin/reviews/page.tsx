@@ -34,7 +34,8 @@ export default function ReviewsPage() {
 
   const fetchReviews = async () => {
     try {
-      const response = await fetch('http://localhost:3002/api/reviews', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/reviews`, {
         credentials: 'include',
       });
       const data = await response.json();
@@ -48,7 +49,8 @@ export default function ReviewsPage() {
 
   const updateStatus = async (id: string, status: string) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/reviews/${id}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/reviews/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

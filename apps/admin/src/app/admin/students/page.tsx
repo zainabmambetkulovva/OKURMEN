@@ -100,7 +100,8 @@ export default function StudentsPage() {
   const fetchGroups = async () => {
     try {
       const token = localStorage.getItem('auth-token');
-      const response = await fetch('http://localhost:3002/api/groups', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/groups`, {
         credentials: 'include',
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
@@ -134,8 +135,9 @@ export default function StudentsPage() {
 
     try {
       const token = localStorage.getItem('auth-token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
       const response = await fetch(
-        `http://localhost:3002/api/groups/${groupId}/students/${studentId}`,
+        `${apiUrl}/api/groups/${groupId}/students/${studentId}`,
         {
           method: 'DELETE',
           credentials: 'include',
@@ -160,8 +162,9 @@ export default function StudentsPage() {
 
     try {
       const token = localStorage.getItem('auth-token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
       const response = await fetch(
-        `http://localhost:3002/api/groups/${groupId}`,
+        `${apiUrl}/api/groups/${groupId}`,
         {
           method: 'DELETE',
           credentials: 'include',
@@ -533,7 +536,8 @@ function EditGroupModal({
   const fetchMentors = async () => {
     try {
       const token = localStorage.getItem('auth-token');
-      const response = await fetch('http://localhost:3002/api/employees?position=MENTOR', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/employees?position=MENTOR`, {
         credentials: 'include',
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
@@ -559,9 +563,10 @@ function EditGroupModal({
 
     try {
       const token = localStorage.getItem('auth-token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
       const url = isEditing 
-        ? `http://localhost:3002/api/groups/${group.id}`
-        : 'http://localhost:3002/api/groups';
+        ? `${apiUrl}/api/groups/${group.id}`
+        : `${apiUrl}/api/groups`;
       
       const response = await fetch(url, {
         method: isEditing ? 'PATCH' : 'POST',
@@ -764,7 +769,8 @@ function AddStudentModal({
 
     try {
       const token = localStorage.getItem('auth-token');
-      const response = await fetch(`http://localhost:3002/api/groups/${group.id}/students`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/groups/${group.id}/students`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -979,7 +985,8 @@ function GrantCourseAccessModal({
   const fetchCourses = async () => {
     try {
       const token = localStorage.getItem('auth-token');
-      const response = await fetch('http://localhost:3002/api/courses', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/courses`, {
         credentials: 'include',
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
@@ -1020,7 +1027,8 @@ function GrantCourseAccessModal({
               courseId: selectedCourseId,
             };
 
-      const response = await fetch('http://localhost:3002/api/admin/course-access', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/admin/course-access`, {
         method: 'POST',
         credentials: 'include',
         headers: {

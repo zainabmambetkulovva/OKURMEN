@@ -5,7 +5,7 @@ import { verify2FACode } from '@/lib/services/telegram-2fa.service';
 import { SignJWT } from 'jose';
 
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.NEXTAUTH_SECRET || 'your-secret-key-change-in-production'
+  process.env.NEXTAUTH_SECRET || 'default-secret-key-change-in-production'
 );
 
 export async function POST(request: NextRequest) {

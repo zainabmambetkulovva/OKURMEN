@@ -42,7 +42,8 @@ export default function AlumniPage() {
 
   const fetchAlumni = async () => {
     try {
-      const response = await fetch('http://localhost:3002/api/alumni', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/alumni`, {
         credentials: 'include',
       });
       const data = await response.json();
@@ -71,7 +72,8 @@ export default function AlumniPage() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3002/api/alumni/${id}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      const response = await fetch(`${apiUrl}/api/alumni/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
@@ -301,9 +303,10 @@ function AlumniModal({
     setLoading(true);
 
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
       const url = alumni
-        ? `http://localhost:3002/api/alumni/${alumni.id}`
-        : 'http://localhost:3002/api/alumni';
+        ? `${apiUrl}/api/alumni/${alumni.id}`
+        : `${apiUrl}/api/alumni`;
       
       const payload = {
         name: formData.name,

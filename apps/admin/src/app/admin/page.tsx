@@ -37,11 +37,13 @@ export default function DashboardPage() {
 
   const fetchDashboardData = async () => {
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+      
       // Загружаем реальные данные из API
       const [coursesRes, siteStatsRes, applicationsRes] = await Promise.all([
-        fetch('http://localhost:3002/api/courses', { credentials: 'include' }),
-        fetch('http://localhost:3002/api/site-stats', { credentials: 'include' }),
-        fetch('http://localhost:3002/api/applications', { credentials: 'include' }),
+        fetch(`${apiUrl}/api/courses`, { credentials: 'include' }),
+        fetch(`${apiUrl}/api/site-stats`, { credentials: 'include' }),
+        fetch(`${apiUrl}/api/applications`, { credentials: 'include' }),
       ]);
 
       // Проверяем response перед парсингом JSON
