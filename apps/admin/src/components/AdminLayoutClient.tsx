@@ -45,16 +45,25 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
   useEffect(() => {
     const checkAuth = async () => {
       try {
+        console.log('=== AdminLayoutClient: checkAuth START ===');
+        console.log('Current pathname:', window.location.pathname);
+        
         // Получаем токен из localStorage
         const token = localStorage.getItem('auth-token');
+        console.log('Token from localStorage - exists:', !!token);
+        if (token) {
+          console.log('Token length:', token.length);
+          console.log('Token starts with:', token.substring(0, 20) + '...');
+        }
         
         if (!token) {
-          console.log('No token found, redirecting to signin');
+          console.log('❌ No token found, redirecting to signin');
           router.push('/auth/signin');
           return;
         }
 
-        console.log('Token found, checking with API...');
+        console.log('✅ Token found, checking with API...');
+        console.log('API URL:', getApiUrl('api/auth/me'));
         const response = await fetch(getApiUrl('api/auth/me'), {
           credentials: 'include',
           headers: {
@@ -62,21 +71,37 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
           },
         });
 
+        console.log('API response status:', response.status);
+        console.log('API response ok:', response.ok);
+
         if (!response.ok) {
-          console.log('Auth check failed, clearing token and redirecting');
+          const responseText = await response.text();
+          console.log('❌ Auth check failed');
+          console.log('Response status:', response.status);
+          console.log('Response text:', responseText.substring(0, 200));
+          console.log('Clearing token and redirecting to signin');
           localStorage.removeItem('auth-token');
           router.push('/auth/signin');
           return;
         }
 
         const data = await response.json();
-        console.log('Auth check successful, user:', data.user);
+        console.log('✅ Auth check successful');
+        console.log('User data:', data.user);
         setUser(data.user);
+        console.log('=== AdminLayoutClient: checkAuth SUCCESS ===');
       } catch (error) {
+        console.error('=== AdminLayoutClient: checkAuth ERROR ===');
         console.error('Auth check failed:', error);
+        console.error('Error type:', error instanceof Error ? error.constructor.name : typeof error);
+        if (error instanceof Error) {
+          console.error('Error message:', error.message);
+        }
+        console.log('Clearing token and redirecting to signin');
         localStorage.removeItem('auth-token');
         router.push('/auth/signin');
       } finally {
+        console.log('Setting loading to false');
         setLoading(false);
       }
     };

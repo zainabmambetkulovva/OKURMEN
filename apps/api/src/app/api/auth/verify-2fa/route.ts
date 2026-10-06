@@ -54,6 +54,9 @@ export async function POST(request: NextRequest) {
 
     // Создаём JWT токен
     console.log('Creating JWT token...');
+    console.log('NEXTAUTH_SECRET exists:', !!process.env.NEXTAUTH_SECRET);
+    console.log('JWT_SECRET length:', JWT_SECRET.length);
+    console.log('Creating token for userId:', user.id);
     const token = await new SignJWT({
       userId: user.id,
       email: user.email,
@@ -64,7 +67,8 @@ export async function POST(request: NextRequest) {
       .setIssuedAt()
       .sign(JWT_SECRET);
 
-    console.log('Token created');
+    console.log('Token created, length:', token.length);
+    console.log('Token starts with:', token.substring(0, 20) + '...');
 
     // Создаём response с токеном
     const response = apiResponse.success({

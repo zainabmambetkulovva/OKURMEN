@@ -9,6 +9,10 @@ const JWT_SECRET = new TextEncoder().encode(
 
 export async function GET(request: NextRequest) {
   try {
+    console.log('=== /api/auth/me START ===');
+    console.log('NEXTAUTH_SECRET exists:', !!process.env.NEXTAUTH_SECRET);
+    console.log('JWT_SECRET length:', JWT_SECRET.length);
+    
     // Пробуем получить токен из Authorization заголовка или cookie
     const authHeader = request.headers.get('authorization');
     const cookieStore = await cookies();
@@ -25,6 +29,10 @@ export async function GET(request: NextRequest) {
     }
 
     console.log('Token exists:', !!token);
+    if (token) {
+      console.log('Token length:', token.length);
+      console.log('Token starts with:', token.substring(0, 20) + '...');
+    }
 
     if (!token) {
       console.log('No token found');
@@ -64,6 +72,7 @@ export async function GET(request: NextRequest) {
     console.log('User ID from token:', userId);
 
     // Get fresh user data
+    console.log('Querying database for userId:', userId);
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -84,6 +93,9 @@ export async function GET(request: NextRequest) {
     });
 
     console.log('User found:', !!user);
+    if (user) {
+      console.log('User details - id:', user.id, 'email:', user.email, 'isActive:', user.isActive);
+    }
 
     if (!user || !user.isActive) {
       console.log('User not found or inactive');
@@ -94,6 +106,7 @@ export async function GET(request: NextRequest) {
     }
 
     console.log('Returning user data');
+    console.log('=== /api/auth/me SUCCESS ===');
     return NextResponse.json({
       success: true,
       user: {
@@ -105,7 +118,13 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
+    console.error('=== /api/auth/me ERROR ===');
     console.error('Get me error:', error);
+    console.error('Error type:', error instanceof Error ? error.constructor.name : typeof error);
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack?.substring(0, 200));
+    }
     return NextResponse.json(
       { success: false, error: 'Authentication failed' },
       { status: 401 }
