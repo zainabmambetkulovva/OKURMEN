@@ -29,6 +29,7 @@ export default function SignInPage() {
       
       // Для админ-панели ВСЕГДА используем 2FA
       const url = getApiUrl('api/auth/request-2fa');
+      console.log('[Auth] API URL:', url);
       
       const response = await fetch(url, {
         method: 'POST',
@@ -39,6 +40,7 @@ export default function SignInPage() {
         credentials: 'include',
       });
 
+      console.log('[Auth] Response status:', response.status);
       const data = await response.json();
 
       if (!response.ok) {
@@ -50,7 +52,12 @@ export default function SignInPage() {
       setStep('2fa');
     } catch (err: any) {
       console.error('[Auth] Ошибка запроса 2FA:', err);
-      setError(err.message || t('auth.generalError'));
+      // Показываем более подробную ошибку для Failed to fetch
+      if (err.message === 'Failed to fetch') {
+        setError('Не удалось подключиться к API. Проверьте подключение к интернету.');
+      } else {
+        setError(err.message || t('auth.generalError'));
+      }
     } finally {
       setLoading(false);
     }

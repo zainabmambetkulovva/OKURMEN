@@ -6,13 +6,27 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/api/')) {
     // Get origin
     const origin = request.headers.get('origin');
-    const allowedOrigins = [
+    
+    // Default localhost origins for development
+    const defaultOrigins = [
       'http://localhost:3000', // Web Frontend
       'http://localhost:3001', // Student Portal
       'http://localhost:3002', // API same origin
       'http://localhost:3003', // Admin Panel
       'http://localhost:3004', // Employee Portal
     ];
+    
+    // Production origins from environment or hardcoded
+    const productionOrigins = process.env.ALLOWED_ORIGINS
+      ? process.env.ALLOWED_ORIGINS.split(',')
+      : [
+          'https://okurmen-admin.vercel.app',
+          'https://okurmen-web.vercel.app',
+          'https://okurmen-student.vercel.app',
+          'https://okurmen-employee.vercel.app',
+        ];
+    
+    const allowedOrigins = [...defaultOrigins, ...productionOrigins];
 
     // Handle preflight OPTIONS requests
     if (request.method === 'OPTIONS') {

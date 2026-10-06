@@ -1,0 +1,28 @@
+[1mdiff --git a/apps/api/src/app/api/admin/course-access/route.ts b/apps/api/src/app/api/admin/course-access/route.ts[m
+[1mindex 705e8ed..79f88b6 100644[m
+[1m--- a/apps/api/src/app/api/admin/course-access/route.ts[m
+[1m+++ b/apps/api/src/app/api/admin/course-access/route.ts[m
+[36m@@ -13,6 +13,14 @@[m [mimport { z } from 'zod';[m
+ // Only fields actually used in the .map() callback are listed.[m
+ type StudentWithUser = { id: string; user: { fullName: string } };[m
+ [m
+[32m+[m[32m// Type for student with enrollments (used in GET /api/admin/course-access?groupId=...)[m
+[32m+[m[32mtype StudentWithEnrollments = {[m
+[32m+[m[32m  enrollments: Array<{[m
+[32m+[m[32m    courseId: string;[m
+[32m+[m[32m    course: any;[m
+[32m+[m[32m  }>;[m
+[32m+[m[32m};[m
+[32m+[m
+ // Local enum to avoid depending on generated Prisma types export[m
+ const EnrollmentStatus = {[m
+   ACTIVE:    'ACTIVE',[m
+[36m@@ -286,7 +294,7 @@[m [mexport async function GET(request: NextRequest) {[m
+ [m
+       // Агрегируем курсы[m
+       const coursesMap = new Map();[m
+[31m-      group.students.forEach((student) => {[m
+[32m+[m[32m      group.students.forEach((student: StudentWithEnrollments) => {[m
+         student.enrollments.forEach((enrollment) => {[m
+           const courseId = enrollment.courseId;[m
+           if (!coursesMap.has(courseId)) {[m
