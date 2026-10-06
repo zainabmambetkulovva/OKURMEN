@@ -140,7 +140,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
     { name: t('nav.lessons'), href: '/admin/lessons', icon: GraduationCap },
     { name: t('nav.students'), href: '/admin/students', icon: GraduationCap },
     { name: t('nav.employees'), href: '/admin/employees', icon: Users },
-    { name: 'Статистика', href: '/admin/statistics', icon: TrendingUp },
+    { name: t('nav.siteStats'), href: '/admin/statistics', icon: TrendingUp },
     { name: t('nav.applications'), href: '/admin/applications', icon: FileText },
     { name: t('nav.reviews'), href: '/admin/reviews', icon: Star },
     { name: t('nav.alumni'), href: '/admin/alumni', icon: Award },
@@ -161,7 +161,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50/30 to-blue-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 transition-colors">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50/30 to-blue-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 transition-colors overflow-x-hidden">
       {/* Mobile menu button */}
       <div className="lg:hidden fixed top-3 left-3 z-50">
         <button
@@ -192,11 +192,11 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
               href="/admin"
               className="flex items-center gap-2.5 group"
             >
-              <div className="w-[44px] h-[44px] p-2.5 bg-gradient-to-br from-orange-400 to-orange-500 rounded-lg shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all flex items-center justify-center flex-shrink-0">
+              <div className="w-[44px] h-[44px] bg-white dark:bg-slate-800 rounded-lg shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all flex items-center justify-center flex-shrink-0 overflow-hidden">
                 <img 
-                  src={theme === 'dark' ? '/logo.svg' : '/logo.svg'}
+                  src={theme === 'dark' ? '/logo-dark.svg' : '/logo.svg'}
                   alt="ОКУРМЭН" 
-                  className="w-5 h-5 brightness-0 invert"
+                  className="w-full h-full object-contain p-1"
                 />
               </div>
               {sidebarOpen && (
@@ -355,7 +355,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
         </header>
 
         {/* Page content */}
-        <main className="p-3 sm:p-4">
+        <main className="p-3 sm:p-4 max-w-full overflow-x-hidden">
           {children}
         </main>
       </div>

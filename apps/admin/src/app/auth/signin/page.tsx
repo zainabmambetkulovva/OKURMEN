@@ -54,7 +54,7 @@ export default function SignInPage() {
       console.error('[Auth] Ошибка запроса 2FA:', err);
       // Показываем более подробную ошибку для Failed to fetch
       if (err.message === 'Failed to fetch') {
-        setError('Не удалось подключиться к API. Проверьте подключение к интернету.');
+        setError(t('error.apiConnection'));
       } else {
         setError(err.message || t('auth.generalError'));
       }
@@ -124,11 +124,11 @@ export default function SignInPage() {
       <div className="w-full max-w-md relative z-10">
         {/* Логотип */}
         <div className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-orange-500 to-orange-600 mb-3 sm:mb-4 shadow-2xl shadow-orange-500/30">
+          <div className="inline-flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-800 mb-3 sm:mb-4 shadow-2xl overflow-hidden">
             <img 
               src="/logo.svg" 
               alt="ОКУРМЭН" 
-              className="w-12 h-12 sm:w-14 sm:h-14 brightness-0 invert"
+              className="w-full h-full object-contain p-2"
             />
           </div>
           <h1 className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent mb-2">

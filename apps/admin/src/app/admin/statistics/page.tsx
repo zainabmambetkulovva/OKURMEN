@@ -3,14 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import { Save, TrendingUp, Calendar, Eye, EyeOff, BarChart3 } from 'lucide-react';
 import { getApiUrl } from '@/config/api';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 type PeriodType = 'MONTH' | 'YEAR' | 'ALL_TIME';
 type MetricType = 'NEW_STUDENTS' | 'NEW_APPLICATIONS' | 'COMPLETED_APPLICATIONS' | 'NEW_PAYMENTS' | 'TOTAL_PAYMENT_AMOUNT' | 'NEW_REVIEWS' | 'NEW_BOOKINGS' | 'TOTAL_STUDENTS' | 'ACTIVE_STUDENTS' | 'TOTAL_COURSES' | 'ACTIVE_COURSES' | 'TOTAL_EMPLOYEES' | 'ACTIVE_EMPLOYEES' | 'TOTAL_GROUPS' | 'TOTAL_LESSONS' | 'TOTAL_ALUMNI';
 
 interface MetricDefinition {
   key: MetricType;
-  label: string;
-  description: string;
+  labelKey: string;
+  descriptionKey: string;
   isPeriodBased: boolean;
 }
 
@@ -20,28 +21,35 @@ interface SiteStats {
   employmentRate: number;
 }
 
-const AVAILABLE_METRICS: MetricDefinition[] = [
-  { key: 'NEW_STUDENTS', label: 'Новые студенты', description: 'Количество новых студентов за период', isPeriodBased: true },
-  { key: 'NEW_APPLICATIONS', label: 'Новые заявки', description: 'Количество новых заявок за период', isPeriodBased: true },
-  { key: 'COMPLETED_APPLICATIONS', label: 'Завершённые заявки', description: 'Количество подтверждённых заявок', isPeriodBased: true },
-  { key: 'NEW_PAYMENTS', label: 'Новые оплаты', description: 'Количество новых оплат за период', isPeriodBased: true },
-  { key: 'TOTAL_PAYMENT_AMOUNT', label: 'Сумма оплат (сом)', description: 'Общая сумма оплат за период', isPeriodBased: true },
-  { key: 'NEW_REVIEWS', label: 'Новые отзывы', description: 'Количество новых отзывов', isPeriodBased: true },
-  { key: 'NEW_BOOKINGS', label: 'Новые бронирования', description: 'Количество новых бронирований', isPeriodBased: true },
-  { key: 'TOTAL_STUDENTS', label: 'Всего студентов', description: 'Текущее количество студентов', isPeriodBased: false },
-  { key: 'ACTIVE_STUDENTS', label: 'Активные студенты', description: 'Количество активных студентов', isPeriodBased: false },
-  { key: 'TOTAL_COURSES', label: 'Всего курсов', description: 'Текущее количество курсов', isPeriodBased: false },
-  { key: 'ACTIVE_COURSES', label: 'Активные курсы', description: 'Количество активных курсов', isPeriodBased: false },
-  { key: 'TOTAL_EMPLOYEES', label: 'Всего сотрудников', description: 'Текущее количество сотрудников', isPeriodBased: false },
-  { key: 'ACTIVE_EMPLOYEES', label: 'Активные сотрудники', description: 'Количество активных сотрудников', isPeriodBased: false },
-  { key: 'TOTAL_GROUPS', label: 'Всего групп', description: 'Текущее количество групп', isPeriodBased: false },
-  { key: 'TOTAL_LESSONS', label: 'Всего уроков', description: 'Текущее количество уроков', isPeriodBased: false },
-  { key: 'TOTAL_ALUMNI', label: 'Выпускники', description: 'Количество выпускников', isPeriodBased: false },
-];
-
-const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-
 export default function StatisticsPage() {
+  const { t } = useLanguage();
+  
+  const AVAILABLE_METRICS: MetricDefinition[] = [
+    { key: 'NEW_STUDENTS', labelKey: 'statistics.metricNewStudents', descriptionKey: 'statistics.metricNewStudentsDesc', isPeriodBased: true },
+    { key: 'NEW_APPLICATIONS', labelKey: 'statistics.metricNewApplications', descriptionKey: 'statistics.metricNewApplicationsDesc', isPeriodBased: true },
+    { key: 'COMPLETED_APPLICATIONS', labelKey: 'statistics.metricCompletedApplications', descriptionKey: 'statistics.metricCompletedApplicationsDesc', isPeriodBased: true },
+    { key: 'NEW_PAYMENTS', labelKey: 'statistics.metricNewPayments', descriptionKey: 'statistics.metricNewPaymentsDesc', isPeriodBased: true },
+    { key: 'TOTAL_PAYMENT_AMOUNT', labelKey: 'statistics.metricTotalPaymentAmount', descriptionKey: 'statistics.metricTotalPaymentAmountDesc', isPeriodBased: true },
+    { key: 'NEW_REVIEWS', labelKey: 'statistics.metricNewReviews', descriptionKey: 'statistics.metricNewReviewsDesc', isPeriodBased: true },
+    { key: 'NEW_BOOKINGS', labelKey: 'statistics.metricNewBookings', descriptionKey: 'statistics.metricNewBookingsDesc', isPeriodBased: true },
+    { key: 'TOTAL_STUDENTS', labelKey: 'statistics.metricTotalStudents', descriptionKey: 'statistics.metricTotalStudentsDesc', isPeriodBased: false },
+    { key: 'ACTIVE_STUDENTS', labelKey: 'statistics.metricActiveStudents', descriptionKey: 'statistics.metricActiveStudentsDesc', isPeriodBased: false },
+    { key: 'TOTAL_COURSES', labelKey: 'statistics.metricTotalCourses', descriptionKey: 'statistics.metricTotalCoursesDesc', isPeriodBased: false },
+    { key: 'ACTIVE_COURSES', labelKey: 'statistics.metricActiveCourses', descriptionKey: 'statistics.metricActiveCoursesDesc', isPeriodBased: false },
+    { key: 'TOTAL_EMPLOYEES', labelKey: 'statistics.metricTotalEmployees', descriptionKey: 'statistics.metricTotalEmployeesDesc', isPeriodBased: false },
+    { key: 'ACTIVE_EMPLOYEES', labelKey: 'statistics.metricActiveEmployees', descriptionKey: 'statistics.metricActiveEmployeesDesc', isPeriodBased: false },
+    { key: 'TOTAL_GROUPS', labelKey: 'statistics.metricTotalGroups', descriptionKey: 'statistics.metricTotalGroupsDesc', isPeriodBased: false },
+    { key: 'TOTAL_LESSONS', labelKey: 'statistics.metricTotalLessons', descriptionKey: 'statistics.metricTotalLessonsDesc', isPeriodBased: false },
+    { key: 'TOTAL_ALUMNI', labelKey: 'statistics.metricTotalAlumni', descriptionKey: 'statistics.metricTotalAlumniDesc', isPeriodBased: false },
+  ];
+
+  const MONTHS = [
+    t('statistics.monthJanuary'), t('statistics.monthFebruary'), t('statistics.monthMarch'), 
+    t('statistics.monthApril'), t('statistics.monthMay'), t('statistics.monthJune'),
+    t('statistics.monthJuly'), t('statistics.monthAugust'), t('statistics.monthSeptember'),
+    t('statistics.monthOctober'), t('statistics.monthNovember'), t('statistics.monthDecember')
+  ];
+  
   const [settings, setSettings] = useState({
     periodType: 'ALL_TIME' as PeriodType,
     month: null as number | null,
@@ -146,13 +154,13 @@ export default function StatisticsPage() {
         body: JSON.stringify(settings),
       });
       if (response.ok) {
-        alert('✅ Настройки сохранены');
+        alert(t('statistics.saveSuccess'));
         fetchSettings();
       } else {
-        alert('❌ Ошибка сохранения');
+        alert(t('statistics.saveError'));
       }
     } catch (error) {
-      alert('❌ Ошибка');
+      alert(t('statistics.saveError'));
     } finally {
       setSaving(false);
     }
@@ -174,16 +182,16 @@ export default function StatisticsPage() {
       });
 
       if (response.ok) {
-        alert('✅ Статистика сайта сохранена');
-        await fetchSiteStats(); // Перезагружаем данные после сохранения
+        alert(t('statistics.saveSuccess'));
+        await fetchSiteStats();
       } else {
         const errorData = await response.text();
         console.error('Server error:', errorData);
-        alert('❌ Ошибка сохранения');
+        alert(t('statistics.saveError'));
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('❌ Ошибка');
+      alert(t('statistics.saveError'));
     } finally {
       setSavingSiteStats(false);
     }
@@ -212,11 +220,11 @@ export default function StatisticsPage() {
     <div className="space-y-3 sm:space-y-4 max-w-full overflow-x-hidden">
       <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2">
         <div>
-          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Управление статистикой</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-0.5 sm:mt-1 text-xs sm:text-sm">Настройте период и показатели для отображения на сайте</p>
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white">{t('statistics.title')}</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-0.5 sm:mt-1 text-xs sm:text-sm">{t('statistics.subtitle')}</p>
         </div>
         <button onClick={handleSave} disabled={saving} className="px-3 sm:px-4 py-2 bg-gradient-to-r from-orange-400 to-orange-500 text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 flex items-center gap-2 font-medium text-xs sm:text-sm flex-shrink-0 min-h-[44px]">
-          <Save className="w-4 h-4 flex-shrink-0" /><span>{saving ? 'Сохранение...' : 'Сохранить'}</span>
+          <Save className="w-4 h-4 flex-shrink-0" /><span>{saving ? t('statistics.saving') : t('statistics.save')}</span>
         </button>
       </div>
 
@@ -224,14 +232,14 @@ export default function StatisticsPage() {
       <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-2 mb-2 sm:mb-3">
           <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 flex-shrink-0" />
-          <h2 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 dark:text-white">Статистика главной страницы</h2>
+          <h2 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 dark:text-white">{t('statistics.siteStatsTitle')}</h2>
         </div>
-        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-3">Эти данные отображаются на главной странице сайта</p>
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-3">{t('statistics.siteStatsDescription')}</p>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3">
           <div>
             <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Общее количество студентов
+              {t('siteStats.totalStudents')}
             </label>
             <input
               type="number"
@@ -241,13 +249,13 @@ export default function StatisticsPage() {
               min="0"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              На главной странице: <strong className="text-orange-500 dark:text-orange-400">{siteStats.totalStudents >= 1000 ? `${Math.floor(siteStats.totalStudents / 1000)}K+` : `${siteStats.totalStudents}+`}</strong>
+              {t('siteStats.displayedAs')} <strong className="text-orange-500 dark:text-orange-400">{siteStats.totalStudents >= 1000 ? `${Math.floor(siteStats.totalStudents / 1000)}K+` : `${siteStats.totalStudents}+`}</strong>
             </p>
           </div>
 
           <div>
             <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Процент трудоустройства
+              {t('siteStats.employmentRate')}
             </label>
             <div className="flex items-center gap-2">
               <input
@@ -261,7 +269,7 @@ export default function StatisticsPage() {
               <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white flex-shrink-0">%</span>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              На главной странице: <strong className="text-orange-500 dark:text-orange-400">{siteStats.employmentRate}%</strong>
+              {t('siteStats.displayedAs')} <strong className="text-orange-500 dark:text-orange-400">{siteStats.employmentRate}%</strong>
             </p>
           </div>
         </div>
@@ -272,26 +280,26 @@ export default function StatisticsPage() {
           className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-medium rounded-lg transition-all disabled:opacity-50 text-xs sm:text-sm min-h-[44px]"
         >
           <Save className="w-4 h-4 flex-shrink-0" />
-          <span>{savingSiteStats ? 'Сохранение...' : 'Сохранить статистику сайта'}</span>
+          <span>{savingSiteStats ? t('statistics.savingSiteStats') : t('statistics.saveSiteStats')}</span>
         </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
         <div className="lg:col-span-1 space-y-3 sm:space-y-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-2 mb-2 sm:mb-3"><Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 flex-shrink-0" /><h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">Период</h2></div>
+            <div className="flex items-center gap-2 mb-2 sm:mb-3"><Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 flex-shrink-0" /><h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">{t('statistics.periodTitle')}</h2></div>
             <div className="space-y-2 sm:space-y-3">
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Тип периода</label>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('statistics.periodType')}</label>
                 <select value={settings.periodType} onChange={(e) => setSettings({ ...settings, periodType: e.target.value as PeriodType })} className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 dark:text-white text-sm min-h-[44px]">
-                  <option value="MONTH">За месяц</option>
-                  <option value="YEAR">За год</option>
-                  <option value="ALL_TIME">За всё время</option>
+                  <option value="MONTH">{t('statistics.periodMonth')}</option>
+                  <option value="YEAR">{t('statistics.periodYear')}</option>
+                  <option value="ALL_TIME">{t('statistics.periodAllTime')}</option>
                 </select>
               </div>
               {settings.periodType === 'MONTH' && (
                 <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Месяц</label>
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('statistics.month')}</label>
                   <select value={settings.month || 1} onChange={(e) => setSettings({ ...settings, month: parseInt(e.target.value) })} className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 dark:text-white text-sm min-h-[44px]">
                     {MONTHS.map((m, i) => <option key={i + 1} value={i + 1}>{m}</option>)}
                   </select>
@@ -299,25 +307,25 @@ export default function StatisticsPage() {
               )}
               {(settings.periodType === 'MONTH' || settings.periodType === 'YEAR') && (
                 <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Год</label>
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('statistics.year')}</label>
                   <input type="number" value={settings.year} onChange={(e) => setSettings({ ...settings, year: parseInt(e.target.value) })} min="2020" max="2099" className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 dark:text-white text-sm min-h-[44px]" />
                 </div>
               )}
             </div>
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-2 mb-2 sm:mb-3">{settings.isPublished ? <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" /> : <EyeOff className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />}<h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">Публикация</h2></div>
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">{settings.isPublished ? <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" /> : <EyeOff className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />}<h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">{t('statistics.publishTitle')}</h2></div>
             <div className="flex items-start gap-2">
               <input type="checkbox" id="isPublished" checked={settings.isPublished} onChange={(e) => setSettings({ ...settings, isPublished: e.target.checked })} className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500 mt-0.5 flex-shrink-0" />
-              <label htmlFor="isPublished" className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">Отображать статистику на сайте</label>
+              <label htmlFor="isPublished" className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">{t('statistics.publishCheckbox')}</label>
             </div>
           </div>
         </div>
 
         <div className="lg:col-span-2 space-y-3 sm:space-y-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-2 mb-2 sm:mb-3"><TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 flex-shrink-0" /><h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">Показатели за период</h2></div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 sm:mb-3">Эти показатели считаются за выбранный период</p>
+            <div className="flex items-center gap-2 mb-2 sm:mb-3"><TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 flex-shrink-0" /><h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">{t('statistics.metricsTitle')}</h2></div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 sm:mb-3">{t('statistics.metricsDescription')}</p>
             <div className="space-y-2">
               {AVAILABLE_METRICS.filter(m => m.isPeriodBased).map(metric => {
                 const isEnabled = settings.enabledMetrics.includes(metric.key);
@@ -327,9 +335,9 @@ export default function StatisticsPage() {
                     <div className="flex items-start gap-2">
                       <input type="checkbox" checked={isEnabled} onChange={() => toggleMetric(metric.key)} className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500 mt-0.5 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-white break-words">{metric.label}</div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400 break-words">{metric.description}</div>
-                        {isEnabled && statValue !== undefined && <div className="text-xs mt-0.5 text-orange-500 dark:text-orange-400 font-medium">Значение: {statValue.toLocaleString()}</div>}
+                        <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-white break-words">{t(metric.labelKey)}</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 break-words">{t(metric.descriptionKey)}</div>
+                        {isEnabled && statValue !== undefined && <div className="text-xs mt-0.5 text-orange-500 dark:text-orange-400 font-medium">{t('statistics.metricValue', { value: statValue.toLocaleString() })}</div>}
                       </div>
                     </div>
                   </div>
@@ -339,8 +347,8 @@ export default function StatisticsPage() {
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-200 dark:border-gray-700">
-            <h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">Текущие показатели</h2>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 sm:mb-3">Эти показатели не зависят от периода</p>
+            <h2 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">{t('statistics.currentMetricsTitle')}</h2>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 sm:mb-3">{t('statistics.currentMetricsDescription')}</p>
             <div className="space-y-2">
               {AVAILABLE_METRICS.filter(m => !m.isPeriodBased).map(metric => {
                 const isEnabled = settings.enabledMetrics.includes(metric.key);
@@ -350,9 +358,9 @@ export default function StatisticsPage() {
                     <div className="flex items-start gap-2">
                       <input type="checkbox" checked={isEnabled} onChange={() => toggleMetric(metric.key)} className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500 mt-0.5 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-white break-words">{metric.label}</div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400 break-words">{metric.description}</div>
-                        {isEnabled && statValue !== undefined && <div className="text-xs mt-0.5 text-orange-500 dark:text-orange-400 font-medium">Значение: {statValue.toLocaleString()}</div>}
+                        <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-white break-words">{t(metric.labelKey)}</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 break-words">{t(metric.descriptionKey)}</div>
+                        {isEnabled && statValue !== undefined && <div className="text-xs mt-0.5 text-orange-500 dark:text-orange-400 font-medium">{t('statistics.metricValue', { value: statValue.toLocaleString() })}</div>}
                       </div>
                     </div>
                   </div>

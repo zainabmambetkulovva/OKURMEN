@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Search, Eye, Check, X, Clock, Mail, Phone, FileText } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { apiFetch } from '@/config/api';
 
 // Disable SSR for this page
 export const dynamic = 'force-dynamic';
@@ -32,10 +33,7 @@ export default function ApplicationsPage() {
 
   const fetchApplications = async () => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
-      const response = await fetch(`${apiUrl}/api/applications`, {
-        credentials: 'include',
-      });
+      const response = await apiFetch('api/applications');
       const data = await response.json();
       setApplications(data.data || []);
     } catch (error) {
@@ -47,23 +45,21 @@ export default function ApplicationsPage() {
 
   const updateStatus = async (id: string, status: string) => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
-      const response = await fetch(`${apiUrl}/api/applications/${id}`, {
+      const response = await apiFetch(`api/applications/${id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ status }),
       });
 
       if (response.ok) {
         fetchApplications();
       } else {
-        console.error('Failed to update application status:', response.status);
-        alert('Ошибка при обновлении статуса заявки');
+        const errorData = await response.json();
+        console.error('Failed to update application status:', response.status, errorData);
+        alert(t('error.updateApplicationStatus', { error: errorData.error || response.statusText }));
       }
     } catch (error) {
       console.error('Failed to update application:', error);
-      alert('Ошибка при обновлении статуса заявки');
+      alert(t('error.updateApplicationStatusGeneric'));
     }
   };
 
@@ -125,10 +121,10 @@ export default function ApplicationsPage() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-black text-slate-900 dark:text-white">
-          Заявки на курсы
+          {t('applications.title')}
         </h1>
         <p className="text-slate-600 dark:text-slate-400 mt-2 text-lg">
-          Управление заявками студентов
+          {t('applications.subtitle')}
         </p>
       </div>
 
@@ -140,7 +136,7 @@ export default function ApplicationsPage() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Поиск по имени, email или телефону"
+            placeholder={t('applications.searchPlaceholder')}
             className="w-full pl-12 pr-4 py-3.5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-transparent dark:text-white transition-all shadow-sm"
           />
         </div>
@@ -150,19 +146,19 @@ export default function ApplicationsPage() {
           onChange={(e) => setFilterStatus(e.target.value)}
           className="px-5 py-3.5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-transparent dark:text-white transition-all shadow-sm font-medium"
         >
-          <option value="ALL">Все статусы</option>
-          <option value="PENDING">В ожидании</option>
-          <option value="CONTACTED">Связались</option>
-          <option value="CONFIRMED">Подтверждены</option>
-          <option value="REJECTED">Отклонены</option>
-          <option value="CANCELLED">Отменены</option>
+          <option value="ALL">{t('applications.allStatuses')}</option>
+          <option value="PENDING">{t('applications.statusPending')}</option>
+          <option value="CONTACTED">{t('applications.statusContacted')}</option>
+          <option value="CONFIRMED">{t('applications.statusConfirmed')}</option>
+          <option value="REJECTED">{t('applications.statusRejected')}</option>
+          <option value="CANCELLED">{t('applications.statusCancelled')}</option>
         </select>
       </div>
 
       {/* Applications List */}
       {filteredApplications.length === 0 ? (
         <div className="text-center py-12 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-3xl border border-slate-200/50 dark:border-slate-700/50">
-          <p className="text-slate-500 dark:text-slate-400 text-lg">Заявки не найдены</p>
+          <p className="text-slate-500 dark:text-slate-400 text-lg">{t('applications.notFound')}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -187,19 +183,19 @@ export default function ApplicationsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400">
                     <div className="flex items-center space-x-2">
                       <Mail className="w-4 h-4" />
-                      <span>{app.email || 'Нет email'}</span>
+                      <span>{app.email || t('applications.noEmail')}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Phone className="w-4 h-4" />
-                      <span>{app.phone || 'Нет телефона'}</span>
+                      <span>{app.phone || t('applications.noPhone')}</span>
                     </div>
                   </div>
 
                   {app.course && (
                     <div className="text-sm">
-                      <span className="text-slate-500 dark:text-slate-400">Курс:</span>{' '}
+                      <span className="text-slate-500 dark:text-slate-400">{t('applications.course')}</span>{' '}
                       <span className="font-bold text-orange-600 dark:text-orange-400">
-                        {app.course?.title || 'Курс не указан'}
+                        {app.course?.title || t('dashboard.courseNotSpecified')}
                       </span>
                     </div>
                   )}
@@ -217,20 +213,20 @@ export default function ApplicationsPage() {
 
                 {/* Actions */}
                 {app.status === 'PENDING' && (
-                  <div className="flex items-center space-x-3">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:space-x-3 w-full lg:w-auto">
                     <button
                       onClick={() => updateStatus(app.id, 'CONFIRMED')}
-                      className="px-5 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-2xl transition-all flex items-center space-x-2 font-bold shadow-lg hover:shadow-xl hover:scale-105"
+                      className="flex-1 sm:flex-none px-4 sm:px-5 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-2xl transition-all flex items-center justify-center space-x-2 font-bold shadow-lg hover:shadow-xl hover:scale-105 min-h-[48px]"
                     >
-                      <Check className="w-4 h-4" />
-                      <span>Подтвердить</span>
+                      <Check className="w-4 h-4 flex-shrink-0" />
+                      <span>{t('common.confirm')}</span>
                     </button>
                     <button
                       onClick={() => updateStatus(app.id, 'REJECTED')}
-                      className="px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-2xl transition-all flex items-center space-x-2 font-bold shadow-lg hover:shadow-xl hover:scale-105"
+                      className="flex-1 sm:flex-none px-4 sm:px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-2xl transition-all flex items-center justify-center space-x-2 font-bold shadow-lg hover:shadow-xl hover:scale-105 min-h-[48px]"
                     >
-                      <X className="w-4 h-4" />
-                      <span>Отклонить</span>
+                      <X className="w-4 h-4 flex-shrink-0" />
+                      <span>{t('common.reject')}</span>
                     </button>
                   </div>
                 )}

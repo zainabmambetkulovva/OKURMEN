@@ -80,7 +80,7 @@ export default function DashboardPage() {
 
   const statCards = [
     {
-      title: 'Всего курсов',
+      title: t('dashboard.totalCoursesLabel'),
       value: stats.totalCourses,
       icon: BookOpen,
       color: 'from-orange-500 to-orange-600',
@@ -88,7 +88,7 @@ export default function DashboardPage() {
       textColor: 'text-orange-600 dark:text-orange-400',
     },
     {
-      title: 'Студентов',
+      title: t('dashboard.students'),
       value: stats.totalStudents,
       icon: Users,
       color: 'from-blue-500 to-blue-600',
@@ -96,7 +96,7 @@ export default function DashboardPage() {
       textColor: 'text-blue-600 dark:text-blue-400',
     },
     {
-      title: 'Доход',
+      title: t('dashboard.revenueLabel'),
       value: `${stats.totalRevenue.toLocaleString()} ${t('dashboard.som')}`,
       icon: DollarSign,
       color: 'from-green-500 to-green-600',
@@ -104,7 +104,7 @@ export default function DashboardPage() {
       textColor: 'text-green-600 dark:text-green-400',
     },
     {
-      title: 'Заявки',
+      title: t('dashboard.applicationsLabel'),
       value: stats.pendingApplications,
       icon: FileText,
       color: 'from-purple-500 to-purple-600',
@@ -132,7 +132,7 @@ export default function DashboardPage() {
         <div className="relative z-10">
           <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">{t('dashboard.title')}</h1>
           <p className="text-orange-50 text-xs sm:text-sm md:text-base">
-            Добро пожаловать в систему управления ОКУРМЭН
+            {t('dashboard.welcome')}
           </p>
         </div>
       </div>
@@ -171,7 +171,7 @@ export default function DashboardPage() {
       {/* Quick Actions */}
       <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-xl p-3 sm:p-4 border border-slate-200/50 dark:border-slate-700/50 shadow-sm">
         <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white mb-3">
-          Быстрые действия
+          {t('dashboard.quickActionsTitle')}
         </h3>
         <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
           <button 
@@ -179,21 +179,21 @@ export default function DashboardPage() {
             className="group px-3 sm:px-4 py-2.5 sm:py-3 bg-gradient-to-r from-orange-400 to-orange-500 text-white rounded-lg hover:shadow-md transition-all flex items-center justify-center gap-2 font-medium text-xs sm:text-sm min-h-[44px]"
           >
             <BookOpen className="w-4 h-4 flex-shrink-0" />
-            <span className="truncate">Добавить курс</span>
+            <span className="truncate">{t('dashboard.addCourseButton')}</span>
           </button>
           <button 
             onClick={() => window.location.href = '/admin/employees'}
             className="px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-all flex items-center justify-center gap-2 font-medium text-xs sm:text-sm min-h-[44px]"
           >
             <Users className="w-4 h-4 flex-shrink-0" />
-            <span className="truncate">Добавить сотрудника</span>
+            <span className="truncate">{t('dashboard.addEmployeeButton')}</span>
           </button>
           <button 
             onClick={() => window.location.href = '/admin/applications'}
             className="px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-all flex items-center justify-center gap-2 font-medium text-xs sm:text-sm min-h-[44px] xs:col-span-2 lg:col-span-1"
           >
             <FileText className="w-4 h-4 flex-shrink-0" />
-            <span className="truncate">Просмотреть заявки</span>
+            <span className="truncate">{t('dashboard.viewApplicationsButton')}</span>
           </button>
         </div>
       </div>
