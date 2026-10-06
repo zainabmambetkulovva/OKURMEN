@@ -82,7 +82,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
     };
 
     checkAuth();
-  }, [router]);
+  }, []); // Run only once on mount
 
   const handleLogout = async () => {
     try {
