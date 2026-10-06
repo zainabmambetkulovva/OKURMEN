@@ -27,12 +27,19 @@ export function middleware(request: NextRequest) {
         ];
     
     const allowedOrigins = [...defaultOrigins, ...productionOrigins];
+    
+    // Check if origin is allowed
+    const isAllowed = origin && (
+      allowedOrigins.includes(origin) ||
+      // Allow Vercel preview deployments for okurmen projects
+      /^https:\/\/okurmen-(admin|web|student|employee)-[a-z0-9]+-[a-z0-9]+\.vercel\.app$/.test(origin)
+    );
 
     // Handle preflight OPTIONS requests
     if (request.method === 'OPTIONS') {
       const response = new NextResponse(null, { status: 204 });
       
-      if (origin && allowedOrigins.includes(origin)) {
+      if (isAllowed) {
         response.headers.set('Access-Control-Allow-Origin', origin);
         response.headers.set('Access-Control-Allow-Credentials', 'true');
         response.headers.set(
@@ -52,7 +59,7 @@ export function middleware(request: NextRequest) {
     // Handle actual requests
     const response = NextResponse.next();
 
-    if (origin && allowedOrigins.includes(origin)) {
+    if (isAllowed) {
       response.headers.set('Access-Control-Allow-Origin', origin);
       response.headers.set('Access-Control-Allow-Credentials', 'true');
       response.headers.set(
