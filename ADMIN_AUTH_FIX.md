@@ -127,14 +127,33 @@ SELECT id, email, "isActive" FROM "User" WHERE email = 'admin@okurmen.kg';
 
 **Решение:** Проверьте `ALLOWED_ORIGINS` в Vercel Environment Variables для `okurmen-api`.
 
-## Commit
+## Commits
+
+### Commit 1: c2a8122
 ```
-commit c2a8122
 fix: improve JWT validation in /api/auth/me endpoint
 
 - Change userId field check order: userId -> user_id -> id
 - Add detailed JWT verification error logging
 - Add debug endpoint to check environment variables
+```
+
+### Commit 2: df00a3d (CRITICAL)
+```
+fix: prevent infinite re-authentication loop in AdminLayoutClient
+
+CRITICAL FIX for session persistence after 2FA verification.
+
+Problem:
+- useEffect with [router] dependency caused checkAuth() to run
+  every time router changed
+- router.push('/admin') triggered router change
+- This caused useEffect to re-run checkAuth()
+- If second API call failed, user was redirected to signin
+
+Solution:
+- Changed useEffect dependencies from [router] to []
+- Now checkAuth() runs only once on component mount
 ```
 
 ## Deployment
